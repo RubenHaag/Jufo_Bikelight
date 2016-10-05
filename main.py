@@ -20,7 +20,7 @@ z = 0 # für die while-Dauerschleife
 
 magnetschalter = False # kann später noch in komplexere funktion umgesetzt werden
 
-for i in range(0, lLed): #setzten der Radien
+for i in range(0, lLed): #setzten der Radien sollte später aus einer Textdatei ausgelesen werden
     matrix[0][i] = i+1
 
 def berrechnungDerPixel(T, t):
