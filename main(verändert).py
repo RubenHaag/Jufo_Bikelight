@@ -39,14 +39,23 @@ for i in range(0,1):
         matrix[2][i] = (sin(k) * x)  #Berechnung der Y Koordinate
     print(matrix)
 
+# for i in range(0, LED_COUNT):
+#     farbe = pix[matrix[1][i], matrix[2][i]] #auslesen eines Pixels
+#     for _ in range(0, LED_COUNT):
+#         r = farbe[0]
+#     for _ in range(0, LED_COUNT):
+#         g = farbe[1]
+#     for _ in range(0, LED_COUNT):
+#         b = farbe[2]
+#     matrix[3] = r # Zuweisung der Rot-Werte
+#     matrix[4] = g # Zuweisung der Grünwerte
+#     matrix[5] = b # Zuweisung der Blau-Werte
+
 for i in range(0, LED_COUNT):
     farbe = pix[matrix[1][i], matrix[2][i]] #auslesen eines Pixels
-    for i in range(0, LED_COUNT):
-        r = farbe[0]
-    for i in range(0, LED_COUNT):
-        g = farbe[1]
-    for i in range(0, LED_COUNT):
-        b = farbe[2]
+    r = farbe[0]
+    g = farbe[1]
+    b = farbe[2]
     matrix[3] = r # Zuweisung der Rot-Werte
     matrix[4] = g # Zuweisung der Grünwerte
     matrix[5] = b # Zuweisung der Blau-Werte
