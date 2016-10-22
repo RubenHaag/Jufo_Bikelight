@@ -41,6 +41,7 @@ for i in range(0,1):
 
 # for i in range(0, LED_COUNT):
 #     farbe = pix[matrix[1][i], matrix[2][i]] #auslesen eines Pixels
+#     _ = 0
 #     for _ in range(0, LED_COUNT):
 #         r = farbe[0]
 #     for _ in range(0, LED_COUNT):
