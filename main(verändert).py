@@ -37,6 +37,7 @@ def line(laenge):
     print(s)
     
 def startPrint():
+    #anzeigen der Starteinstellungen
     str1 = "Led Bikelight"
     str2 = "\nDie Momentanen Einstellungen sind:"
     line(30)
@@ -52,7 +53,8 @@ def startPrint():
     print("Invertiertes Signal = " + LED_INVERT)
     print("Die Radien sind:\n\t" + matrix[0])
     line(30)
-    print("Drück Ctrl-C zum beenden.")
+    print("Drück Strg-C zum beenden.")
+    
 def bildAuslesen(t, T):
     global matrix
     global streifen
@@ -63,16 +65,17 @@ def bildAuslesen(t, T):
         
         r, g, b, _ = pix[matrix[1][i], matrix[2][i]] #auslesen eines Pixels
         
-        matrix[3] = r # Zuweisung der Rot-Werte
-        matrix[4] = g # Zuweisung der Grünwerte
-        matrix[5] = b # Zuweisung der Blau-Werte
+        matrix[3] = r   # Zuweisung der Rot-Werte
+        matrix[4] = g   # Zuweisung der Grünwerte
+        matrix[5] = b   # Zuweisung der Blau-Werte
         streifen.setPixelColor(i+1, (matrix[3], matrix[4], matrix[5]))
+                        # Zuweisung der Pixelfarben fuer den LED-Streifen
 
 
 def main():
     streifen = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
-    streifen.begin()
-    startPrint()
+    streifen.begin()                        #starten des LED-Streifens
+    startPrint()                            #Drucken der Anfangseinstellungen
     while z==0:                             #Dauerschleife fuer die Zeit
         t1 = time()                         #startzeit t1 
         while not magnetschalter:
