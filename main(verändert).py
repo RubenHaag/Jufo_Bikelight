@@ -29,59 +29,59 @@ x = 0 # Variable für die for-Schleife
 for i in range(0, LED_COUNT): # Setzen der Radien; sollte später aus einer Textdatei ausgelesen werden
     x = x + 0.7
     matrix[0][i] = x
+
+def line(laenge):
+    s = ""
+    for i in range(0, laenge):
+        s += "-"
+    print(s)
     
-for i in range(0,1):
-    k = 2*pi*t/T #Ausrechnen des Winkels im Bogenmaß
-    x = 0 #für die For-Schleife
-    for i in range(0, LED_COUNT): # da wir mit der Listenrechnung nichts sinnvolles erhielten, Doppelung der For-Schleife
-        x = x + 0.7
-        matrix[1][i] = (cos(k) * -1 * x)  #Berechnung der X-Koordinate
-        matrix[2][i] = (sin(k) * x)  #Berechnung der Y Koordinate
-    print(matrix)
-
-# for i in range(0, LED_COUNT):
-#     farbe = pix[matrix[1][i], matrix[2][i]] #auslesen eines Pixels
-#     _ = 0
-#     for _ in range(0, LED_COUNT):
-#         r = farbe[0]
-#     for _ in range(0, LED_COUNT):
-#         g = farbe[1]
-#     for _ in range(0, LED_COUNT):
-#         b = farbe[2]
-#     matrix[3] = r # Zuweisung der Rot-Werte
-#     matrix[4] = g # Zuweisung der Grünwerte
-#     matrix[5] = b # Zuweisung der Blau-Werte
-
-for i in range(0, LED_COUNT):
-    farbe = pix[matrix[1][i], matrix[2][i]] #auslesen eines Pixels
-    r = farbe[0]
-    g = farbe[1]
-    b = farbe[2]
-    matrix[3] = r # Zuweisung der Rot-Werte
-    matrix[4] = g # Zuweisung der Grünwerte
-    matrix[5] = b # Zuweisung der Blau-Werte
-
-def farbreihe(streifen, farbe, wait_ms = 50):
-    i = 0
+def startPrint():
+    str1 = "Led Bikelight"
+    str2 = "\nDie Momentanen Einstellungen sind:"
+    line(30)
+    print(str1)
+    line(30)
+    print(str2)
+    print("")
+    print("Laenge des Led-Streifens = " + LED_COUNT)
+    print("GPIO-Pin = " = LED_PIN)
+    print("f in Hz = " + LED_FREQ_HZ)
+    print("DMA Kanal = " + LED_DMA)
+    print("LED HElligkeit = " + LED_BRIGHTNESS)
+    print("Invertiertes Signal = " + LED_INVERT)
+    print("Die Radien sind:\n\t" + matrix[0])
+    line(30)
+    print("Drück Ctrl-C zum beenden.")
+def bildAuslesen(t, T):
+    global matrix
+    global streifen
     for i in range(0, LED_COUNT):
-        streifen.setPixelColor(i+1, farbe)
-        streifen.show()
+        k = 2*pi*t/T #ausrechnen des Winkels in rad
+        matrix[1][i] = (round(math.cos(k) * matrix[0][i], 1)*32) #berechnung der X-Koordinate
+        matrix[2][i] = (round(math.sin(k) * matrix[0][i], 1)*32) #Berrechnung der Y Koordinate
+        
+        r, g, b, _ = pix[matrix[1][i], matrix[2][i]] #auslesen eines Pixels
+        
+        matrix[3] = r # Zuweisung der Rot-Werte
+        matrix[4] = g # Zuweisung der Grünwerte
+        matrix[5] = b # Zuweisung der Blau-Werte
+        streifen.setPixelColor(i+1, (matrix[3], matrix[4], matrix[5]))
+
 
 def main():
-    while z==0:
-        t1 = time() #startzeit t1
-        T = 1
-        while not magnetschalter:
-            t = time() - T				#Ausrechnen der größe des Zeitabschnitts
-            berechnungDerPixel(T, t)
-            streifen.show()
-
-        T = time() - t1 				#Ausrechnen von T nach T = t2 - t1
-
-if __name__  == '__main__':
     streifen = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
     streifen.begin()
+    startPrint()
+    while z==0:                             #Dauerschleife fuer die Zeit
+        t1 = time()                         #startzeit t1 
+        while not magnetschalter:
+            if T is not 0:                  #dient der verhinderung von Fehlern in der ersten Umdrehung
+                t = time() - T				#Ausrechnen der größe des Zeitabschnitts
+                bildAuslesen;(t, T)
+                streifen.show()
 
-    print("Drück Ctrl-C zum beenden.")
-    while True:
-        farbreihe(streifen, Color(r, g, b))
+        T = time() - t1 				    #Ausrechnen von T nach T = t2 - t1
+
+if __name__  == '__main__':
+    main()
