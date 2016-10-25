@@ -4,11 +4,12 @@ from math import cos
 from math import pi
 from PIL.Image import *
 from neopixel import *
+from time import sleep
 
 im = open("/home/pi/Desktop/JugendForscht/Bild.png")
 pix = im.load()
 
-LED_COUNT = 144 # Anzahl der LED's auf dem LED-Streifen
+LED_COUNT = 72 # Anzahl der LED's auf dem LED-Streifen
 LED_PIN   = 18 # GPIO-Nummer des Pin's, mit dem man den LED-Streifen ansteuert.
 LED_FREQ_HZ = 800000 # Blinkfrequenz
 LED_DMA   = 5  # DMA-Kanal für generieren des Signals ?
@@ -30,9 +31,9 @@ for i in range(0, LED_COUNT): # Setzen der Radien; sollte später aus einer Text
     x = x + 0.7
     matrix[0][i] = x
 
-def line(laenge):
+def line(länge):
     s = ""
-    for i in range(0, laenge):
+    for i in range(0, länge):
         s += "-"
     print(s)
     
@@ -45,13 +46,12 @@ def startPrint():
     line(30)
     print(str2)
     print("")
-    print("Laenge des Led-Streifens = " + LED_COUNT)
-    print("GPIO-Pin = " = LED_PIN)
-    print("f in Hz = " + LED_FREQ_HZ)
-    print("DMA Kanal = " + LED_DMA)
-    print("LED HElligkeit = " + LED_BRIGHTNESS)
-    print("Invertiertes Signal = " + LED_INVERT)
-    print("Die Radien sind:\n\t" + matrix[0])
+    print("Anzahl der Led's = " + str(LED_COUNT))
+    print("GPIO-Pin = " + str(LED_PIN))
+    print("f in Hz = " + str(LED_FREQ_HZ))
+    print("DMA Kanal = " + str(LED_DMA))
+    print("LED HElligkeit = " + str(LED_BRIGHTNESS))
+    print("Invertiertes Signal = " + str(LED_INVERT))
     line(30)
     print("Drück Strg-C zum beenden.")
     
