@@ -15,6 +15,8 @@ LED_FREQ_HZ = 800000 # Blinkfrequenz
 LED_DMA   = 5  # DMA-Kanal für generieren des Signals ?
 LED_BRIGHTNESS = 100 # Helligkeit
 LED_INVERT = False # Falls Transistor: True
+LED_ABSTAND = 50/LED_COUNT
+MIN_RAD = 2.5
 
 matrix = [[0 for x in range(0, LED_COUNT)]for y in range(1,7)] # Erschaffen einer Liste, in der sechs Listen enthalten sind
 
@@ -23,12 +25,10 @@ T = 2 # Umlaufzeit
 i = 0 # Variable für die for-Schleife
 z = 0 # für die while-Dauerschleife
 
-magnetschalter = False # kann später noch in komplexere funktion umgesetzt werden
-
-x = 0 # Variable für die for-Schleife
+x = MIN_RAD # Variable für die for-Schleife
 
 for i in range(0, LED_COUNT): # Setzen der Radien; sollte später aus einer Textdatei ausgelesen werden
-    x = x + 0.7
+    x += LED_ABSTAND
     matrix[0][i] = x
 
 def line(länge):
@@ -41,9 +41,9 @@ def startPrint():
     #anzeigen der Starteinstellungen
     str1 = "Led Bikelight"
     str2 = "\nDie Momentanen Einstellungen sind:"
-    line(30)
+    line(50)
     print(str1)
-    line(30)
+    line(50)
     print(str2)
     print("")
     print("Anzahl der Led's = " + str(LED_COUNT))
@@ -52,8 +52,12 @@ def startPrint():
     print("DMA Kanal = " + str(LED_DMA))
     print("LED HElligkeit = " + str(LED_BRIGHTNESS))
     print("Invertiertes Signal = " + str(LED_INVERT))
-    line(30)
+    line(50)
     print("Drück Strg-C zum beenden.")
+    line(50)
+
+def Magnetschalter():
+	return False
     
 def bildAuslesen(t, T):
     global matrix
@@ -69,16 +73,17 @@ def bildAuslesen(t, T):
         matrix[4] = g   # Zuweisung der Grünwerte
         matrix[5] = b   # Zuweisung der Blau-Werte
         streifen.setPixelColor(i+1, (matrix[3], matrix[4], matrix[5]))
-                        # Zuweisung der Pixelfarben fuer den LED-Streifen
+        # Zuweisung der Pixelfarben fuer den LED-Streifen
 
 
 def main():
+	#initialisierung des Led streifens
     streifen = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
     streifen.begin()                        #starten des LED-Streifens
     startPrint()                            #Drucken der Anfangseinstellungen
     while z==0:                             #Dauerschleife fuer die Zeit
         t1 = time()                         #startzeit t1 
-        while not magnetschalter:
+        while not magnetschalter():
             if T is not 0:                  #dient der verhinderung von Fehlern in der ersten Umdrehung
                 t = time() - T				#Ausrechnen der größe des Zeitabschnitts
                 bildAuslesen;(t, T)
