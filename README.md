@@ -1,17 +1,4 @@
 Jufo_Bikelight
 Hierbei handelt es sich um den Projektordner für ein Jugend Forscht Projekt
 
-Das Bikelight soll mit Hilfe der Drehung des Reifens ein Bild erzeugen,
-dass für verschiedene Zwecke, wie zum Beispiel Werbung, genutzt werden
-kann, aber auch der Sicherheit des Fahrradfahrers dient, welcher sich 
-dadurch für Autofahrer besser erkennbar macht. Die Erzeugung des Bildes
-geschieht dadurch, dass die Leuchtdioden einzeln angesteuert werden und
-dann durch schnelle Änderung der angezeigten Farben in einem vorgegebe-
-nem Pixelmuster das Bild erzeugen, wobei mit Hilfe eines entsprechendem
-Sensors die Drehgeschwindigkeit des Reifens ermittelt wird. Der Bordcom-
-puter soll berechnet, wann welche Leuchtdiode die Farbe wechselt.Wir werden
-Leuchtdioden an dem Reifen montieren, eine Apparatur zur Aufbewahrung der
-Akkus konstruieren und ein entsprechendes Programm für den Bordcomputer
-erstellen, dass die oben genannten Berechnungen durchführt und die Leucht-
-dioden ansteuert.
-
+Ist es möglich kostengünstig eine Fahrradfelgenbeleuchtung, welche in der Lage ist auf einem Speichenrad ein Bild zu erzeugen, herzustellen? Dies soll mit Hilfe eines von uns selbst erstellten Systems und Programmes möglich gemacht werden. Das System besteht aus einem Raspberry PI Zero, einem Akku, und einem LED-Streifen und das Programm für die radiale, geschwindigkeitsabhängige Ansteuerung der LEDs haben wir selbst in Python 3 programmiert. Mit der Adafruit-Neopixel-Library kann unser Programm auf den LED-Streifen zugreifen und die einzelnen Licht emittierenden Dioden ansteuern. Mit der PIL kann unser Programm ein beliebiges Bild auslesen und uns die Farbwerte jedes einzelnen Pixels des Bildes angeben. Es kann außerdem den Stromfluss eines Magnetschalters überprüfen, womit es die Winkelgeschwindigkeit ermittelt und damit ein geschwindigkeitsunabhängiges Bild erstellt. Aufgrund der Trägheit des Auges des Betrachters und der konstant hohen Geschwindigkeit des Rades, entsteht für den Betrachter der Eindruck eines ruhenden  Bildes. Somit gelingt es uns, das ruhende Bild zu erschaffen. 
