@@ -121,7 +121,7 @@ def main():
         if gp.input(MAGNET_PIN) == False:           #Damit die Zeit nur einmal pro umdrehung gemessen wird
 
             while gp.input(MAGNET_PIN) == False:
-                t = T + time() - t1                 #Ausrechnen der größe des Zeitabschnitts
+                t = time() - t1                 #Ausrechnen der größe des Zeitabschnitts
                 streifenBedienen()
             T = time() - t1                         #Ausrechnen von T nach T = t2 - t1
 
