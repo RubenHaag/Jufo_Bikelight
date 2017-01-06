@@ -11,6 +11,7 @@ vorführung = True
 
 im = open("/home/pi/Desktop/JugendForscht/Stop.png")
 pix = im.load()
+breite, höhe = im.size
 
 # LED strip configuration:
 LED_COUNT       = 70      # Number of LED pixels.
@@ -23,13 +24,11 @@ LED_INVERT      = False
 ANZAHL_STREIFEN = 2
 
 
-
-
 t = 1       # Zeitabschnitt  
 T = 2       # Umlaufzeit
 i = 0       # Variable für die for-Schleife
-minR = 5    #Mindestradius
-w = 0       #Winkelgeschwindigkeit
+minR = 5    # Mindestradius
+w = 0       # Winkelgeschwindigkeit
 
 matrix = [[0 for x in range(0, LED_COUNT)]for y in range(0, 3)] # Erschaffen einer Liste, in der drei Listen (X- und Y-Koordinaten; Radius)enthalten sind
 
@@ -39,6 +38,8 @@ gp.setup(MAGNET_PIN, gp.IN) #Anschluss
 
 for i in range(0, int(LED_COUNT/2)): # Erschaffen der Radien
 	matrix[0][i] = i+1+minR
+
+
 
 def line(länge):
 	s = ""
@@ -115,6 +116,8 @@ def main():
 
 	streifen.begin()    #initialisieren des LED-Streifens
 	startPrint()        #Drucken der Anfangseinstellungen
+
+
 	while True:                             
 		t1 = time()                                 #startzeit t1
 		
