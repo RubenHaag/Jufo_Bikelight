@@ -1,4 +1,4 @@
-#Dieses Programm wurde im Rahmen des Jugend Forscht Projekts geschrieben 
+#Dieses Programm wurde im Rahmen des Jugend Forscht Projekts geschrieben
 
 from time import time
 from math import pi, sin, cos
@@ -11,17 +11,17 @@ vorführung = True
 
 im = open("/home/pi/Desktop/JugendForscht/Stop.png")
 pix = im.load()
-breite, höhe = im.size
+breite, höhe = im.size	#die Breite und die höhe des Bildes wird ausgelesen
 
 # LED strip configuration:
-LED_COUNT       = 70      # Number of LED pixels.
-LED_PIN         = 18      # GPIO pin connected to the pixels (must support PWM!).
-MAGNET_PIN      = 17
-LED_FREQ_HZ     = 1000000  # LED signal frequency in hertz (usually 800khz)
-LED_DMA         = 5       # DMA channel to use for generating signal (try 5)
-LED_BRIGHTNESS  = 100     # Set to 0 for darkest and 255 for brightest
-LED_INVERT      = False
-ANZAHL_STREIFEN = 2
+LED_COUNT       = 70      	# Number of LED pixels.
+LED_PIN         = 18      	# GPIO pin connected to the pixels (must support PWM!).
+MAGNET_PIN      = 17		# Nummer des Magnet Pins
+LED_FREQ_HZ     = 1000000  	# Frequenz der Led's in Hz
+LED_DMA         = 5       	# DMA Kanal, des Led pins(siehe C code der Library)
+LED_BRIGHTNESS  = 100     	# Set to 0 for darkest and 255 for brightest
+LED_INVERT      = False		# Wenn ein transistor zwischengeschaltet ist Aktivieren
+ANZAHL_STREIFEN = 2			# Anzahl der verwendeten Led Streifen pro pin
 
 
 t = 1       # Zeitabschnitt  
@@ -30,15 +30,11 @@ i = 0       # Variable für die for-Schleife
 minR = 5    # Mindestradius
 w = 0       # Winkelgeschwindigkeit
 
-matrix = [[0 for x in range(0, LED_COUNT)]for y in range(0, 3)] # Erschaffen einer Liste, in der drei Listen (X- und Y-Koordinaten; Radius)enthalten sind
-
-gp.setmode(gp.BCM)          # Welche Nummern für die Pins verwendet werden
-gp.setwarnings(False)       # Keine Warnungen
-gp.setup(MAGNET_PIN, gp.IN) #Anschluss
-
+# erschaffen einer Liste, in der drei Listen enthalten sind
+# matrix[0] = r; matrix[1] =
+matrix = [0 for x in range(0, LED_COUNT)]
 for i in range(0, int(LED_COUNT/2)): # Erschaffen der Radien
 	matrix[0][i] = i+1+minR
-
 
 
 def line(länge):
@@ -69,8 +65,8 @@ def startPrint():   # Startanzeige
 
 def bildAuslesen(alpha, rad):
 
-	x = int(round(cos(alpha) * rad + 50))   #Berechnung der X-Koordinate
-	y = int(round(sin(alpha) * rad + 50))   #Berrechnung der Y Koordinate
+	x = int(round(cos(alpha) * rad + breite))   #Berechnung der X-Koordinate
+	y = int(round(sin(alpha) * rad + höhe))   #Berrechnung der Y Koordinate
 
 	r,g,b, _ = pix[x, y]                #auslesen eines Pixels
 	return Color(g, r, b)
@@ -87,28 +83,35 @@ def streifenBedienen():
 	if vorführung:
 		alpha+=pi
 
-	x = streifen.numPixels()
-	u = int(streifen.numPixels()/ANZAHL_STREIFEN)
+	n = streifen.numPixels()
+	u = int(n/ANZAHL_STREIFEN)
 
 	for i in range(u):
 		u-=1
-		streifen.setPixelColor(i, bildAuslesen(alpha + pi, matrix[0][u]))
+		streifen.setPixelColor(i, bildAuslesen(alpha + pi, matrix[u]))
 
-	for i in range(int(x /ANZAHL_STREIFEN), x):
-		streifen.setPixelColor(i, bildAuslesen(alpha, matrix[0][int(i-x/ANZAHL_STREIFEN)]))
+	u = int(n/ANZAHL_STREIFEN)
+
+	for i in range(int(x /ANZAHL_STREIFEN), n):
+		streifen.setPixelColor(i, bildAuslesen(alpha, matrix[i-u]))
 
 	streifen.show()
 
 
 def main():
-	#Diese Variablen werden Global benötigt, da sie in mehreren Methoden benutzt werden
-	#Es ist Ressourcensparender die Variablen direkt zu globalisieren, als 
+	# Diese Variablen werden Global benötigt, da sie in mehreren Methoden benutzt werden
+	# Es ist Ressourcensparender die Variablen direkt zu globalisieren, als sie als
+	# Parameter zu übergeben
 	global T 
 	global t
 	global t1
 	global matrix
 	global streifen
 	global w
+
+	gp.setmode(gp.BCM)          # Welche Nummern für die Pins verwendet werden
+	gp.setwarnings(False)       # Keine Warnungen
+	gp.setup(MAGNET_PIN, gp.IN) # Anschluss
 
 	
 	#Erschaffen des Led-Streifen-Objekts
@@ -119,7 +122,7 @@ def main():
 
 
 	while True:                             
-		t1 = time()                                 #startzeit t1
+		t1 = time()                                 #startzeit der umdrehung t1
 		
 		if gp.input(MAGNET_PIN) == False:           #Damit die Zeit nur einmal pro umdrehung gemessen wird
 
@@ -127,7 +130,8 @@ def main():
 				t = time() - t1               #Ausrechnen der größe des Zeitabschnitts
 				w = 2 * pi / T                #berrechnen der Aktuellen Winkelgeschwindigkeit
 				streifenBedienen()
-			T = time() - t1                         #Ausrechnen von T nach T = t2 - t1
+
+			T = time() - t1                   #Ausrechnen von T nach T = t2 - t1
 
 if __name__ == '__main__':
 	main()
