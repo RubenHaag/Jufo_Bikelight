@@ -124,11 +124,13 @@ def main():
 	while True:                             
 		t1 = time()                                 #startzeit der umdrehung t1
 		
-		if gp.input(MAGNET_PIN) == False:           #Damit die Zeit nur einmal pro umdrehung gemessen wird
-
+		if gp.input(MAGNET_PIN) == False:       #Damit die Zeit nur einmal pro umdrehung gemessen wird
+			
+			w = 2 * pi / T 				#berrechnen der Aktuellen Winkelgeschwindigkeit
+			
 			while gp.input(MAGNET_PIN) == False:
 				t = time() - t1               #Ausrechnen der größe des Zeitabschnitts
-				w = 2 * pi / T                #berrechnen der Aktuellen Winkelgeschwindigkeit
+				               
 				streifenBedienen()
 
 			T = time() - t1                   #Ausrechnen von T nach T = t2 - t1
