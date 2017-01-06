@@ -30,7 +30,6 @@ T = 2       # Umlaufzeit
 i = 0       # Variable für die for-Schleife
 minR = 5    #Mindestradius
 w = 0       #Winkelgeschwindigkeit
-k = 0       #Winkel
 
 matrix = [[0 for x in range(0, LED_COUNT)]for y in range(0, 3)] # Erschaffen einer Liste, in der drei Listen (X- und Y-Koordinaten; Radius)enthalten sind
 
@@ -67,10 +66,10 @@ def startPrint():   # Startanzeige
     print("Drücke Strg-C zum beenden.")
     line(50)
 
-def bildAuslesen(k, rad):
+def bildAuslesen(alpha, rad):
 
-    x = int(round(cos(k) * rad + 50))   #Berechnung der X-Koordinate
-    y = int(round(sin(k) * rad + 50))   #Berrechnung der Y Koordinate
+    x = int(round(cos(alpha) * rad + 50))   #Berechnung der X-Koordinate
+    y = int(round(sin(alpha) * rad + 50))   #Berrechnung der Y Koordinate
 
     r,g,b, _ = pix[x, y]                #auslesen eines Pixels
     return Color(g, r, b)
@@ -82,20 +81,20 @@ def streifenBedienen():
     global streifen
 
     w = 2 * pi / T #berrechnen der Aktuellen Winkelgeschwindigkeit
-    k = w * t-pi/2 #ausrechnen des Winkels in Bogenmaß
+    alpha = w * t-pi/2 #ausrechnen des Winkels in Bogenmaß
 
     if vorführung:
-        k+=pi
+        alpha+=pi
 
     x = streifen.numPixels()
     u = int(streifen.numPixels()/ANZAHL_STREIFEN)
 
     for i in range(u):
         u-=1
-        streifen.setPixelColor(i, bildAuslesen(k + pi, matrix[0][u]))
+        streifen.setPixelColor(i, bildAuslesen(alpha + pi, matrix[0][u]))
 
     for i in range(int(x /ANZAHL_STREIFEN), x):
-        streifen.setPixelColor(i, bildAuslesen(k, matrix[0][int(i-x/ANZAHL_STREIFEN)]))
+        streifen.setPixelColor(i, bildAuslesen(alpha, matrix[0][int(i-x/ANZAHL_STREIFEN)]))
 
     streifen.show()
 
@@ -121,7 +120,7 @@ def main():
         if gp.input(MAGNET_PIN) == False:           #Damit die Zeit nur einmal pro umdrehung gemessen wird
 
             while gp.input(MAGNET_PIN) == False:
-                t = time() - t1                 #Ausrechnen der größe des Zeitabschnitts
+                t = time() - t1                     #Ausrechnen der größe des Zeitabschnitts
                 streifenBedienen()
             T = time() - t1                         #Ausrechnen von T nach T = t2 - t1
 
