@@ -38,91 +38,93 @@ gp.setwarnings(False)       # Keine Warnungen
 gp.setup(MAGNET_PIN, gp.IN) #Anschluss
 
 for i in range(0, int(LED_COUNT/2)): # Erschaffen der Radien
-    matrix[0][i] = i+1+minR
+	matrix[0][i] = i+1+minR
 
 def line(länge):
-    s = ""
-    for i in range(0, länge):
-        s += "-"
-    print(s)
-    
+	s = ""
+	for i in range(0, länge):
+		s += "-"
+	print(s)
+	
 
 def startPrint():   # Startanzeige
-    str1 = "Led Bikelight"
-    str2 = "\nDie Momentanen Einstellungen sind:"
-    line(50)
-    print(str1)
-    line(50)
-    print(str2)
-    print("")
-    print("Anzahl der Led's: " + str(LED_COUNT))
-    print("GPIO-Pin: " + str(LED_PIN))
-    print("f in Hz: " + str(LED_FREQ_HZ))
-    print("DMA Kanal: " + str(LED_DMA))
-    print("LED HElligkeit: " + str(LED_BRIGHTNESS))
-    print("Invertiertes Signal: " + str(LED_INVERT))
-    print("")
-    line(50)
-    print("Drücke Strg-C zum beenden.")
-    line(50)
+	str1 = "Led Bikelight"
+	str2 = "\nDie Momentanen Einstellungen sind:"
+	line(50)
+	print(str1)
+	line(50)
+	print(str2)
+	print("")
+	print("Anzahl der Led's: " + str(LED_COUNT))
+	print("GPIO-Pin: " + str(LED_PIN))
+	print("f in Hz: " + str(LED_FREQ_HZ))
+	print("DMA Kanal: " + str(LED_DMA))
+	print("LED HElligkeit: " + str(LED_BRIGHTNESS))
+	print("Invertiertes Signal: " + str(LED_INVERT))
+	print("")
+	line(50)
+	print("Drücke Strg-C zum beenden.")
+	line(50)
 
 def bildAuslesen(alpha, rad):
 
-    x = int(round(cos(alpha) * rad + 50))   #Berechnung der X-Koordinate
-    y = int(round(sin(alpha) * rad + 50))   #Berrechnung der Y Koordinate
+	x = int(round(cos(alpha) * rad + 50))   #Berechnung der X-Koordinate
+	y = int(round(sin(alpha) * rad + 50))   #Berrechnung der Y Koordinate
 
-    r,g,b, _ = pix[x, y]                #auslesen eines Pixels
-    return Color(g, r, b)
+	r,g,b, _ = pix[x, y]                #auslesen eines Pixels
+	return Color(g, r, b)
 
 def streifenBedienen():
-    global matrix
-    global T
-    global t
-    global streifen
+	global matrix
+	global T
+	global t
+	global streifen
+	global w
 
-    w = 2 * pi / T #berrechnen der Aktuellen Winkelgeschwindigkeit
-    alpha = w * t-pi/2 #ausrechnen des Winkels in Bogenmaß
+	alpha = w * t-pi/2 #ausrechnen des Winkels in Bogenmaß
 
-    if vorführung:
-        alpha+=pi
+	if vorführung:
+		alpha+=pi
 
-    x = streifen.numPixels()
-    u = int(streifen.numPixels()/ANZAHL_STREIFEN)
+	x = streifen.numPixels()
+	u = int(streifen.numPixels()/ANZAHL_STREIFEN)
 
-    for i in range(u):
-        u-=1
-        streifen.setPixelColor(i, bildAuslesen(alpha + pi, matrix[0][u]))
+	for i in range(u):
+		u-=1
+		streifen.setPixelColor(i, bildAuslesen(alpha + pi, matrix[0][u]))
 
-    for i in range(int(x /ANZAHL_STREIFEN), x):
-        streifen.setPixelColor(i, bildAuslesen(alpha, matrix[0][int(i-x/ANZAHL_STREIFEN)]))
+	for i in range(int(x /ANZAHL_STREIFEN), x):
+		streifen.setPixelColor(i, bildAuslesen(alpha, matrix[0][int(i-x/ANZAHL_STREIFEN)]))
 
-    streifen.show()
+	streifen.show()
 
 
 def main():
-    #Diese Variablen werden Global benötigt, da sie in mehreren Methoden benutzt werden
-    #Es ist Ressourcensparender die Variablen direkt zu globalisieren, als 
-    global T 
-    global t
-    global t1
-    global matrix
-    global streifen
+	#Diese Variablen werden Global benötigt, da sie in mehreren Methoden benutzt werden
+	#Es ist Ressourcensparender die Variablen direkt zu globalisieren, als 
+	global T 
+	global t
+	global t1
+	global matrix
+	global streifen
+	global w
 
-    
-    #Erschaffen des Led-Streifen-Objekts
-    streifen = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
+	
+	#Erschaffen des Led-Streifen-Objekts
+	streifen = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
 
-    streifen.begin()    #initialisieren des LED-Streifens
-    startPrint()        #Drucken der Anfangseinstellungen
-    while True:                             
-        t1 = time()                                 #startzeit t1
-        
-        if gp.input(MAGNET_PIN) == False:           #Damit die Zeit nur einmal pro umdrehung gemessen wird
+	streifen.begin()    #initialisieren des LED-Streifens
+	startPrint()        #Drucken der Anfangseinstellungen
+	while True:                             
+		t1 = time()                                 #startzeit t1
+		
+		if gp.input(MAGNET_PIN) == False:           #Damit die Zeit nur einmal pro umdrehung gemessen wird
 
-            while gp.input(MAGNET_PIN) == False:
-                t = time() - t1                     #Ausrechnen der größe des Zeitabschnitts
-                streifenBedienen()
-            T = time() - t1                         #Ausrechnen von T nach T = t2 - t1
+			while gp.input(MAGNET_PIN) == False:
+				t = time() - t1               #Ausrechnen der größe des Zeitabschnitts
+				w = 2 * pi / T                #berrechnen der Aktuellen Winkelgeschwindigkeit
+				streifenBedienen()
+			T = time() - t1                         #Ausrechnen von T nach T = t2 - t1
 
 if __name__ == '__main__':
-    main()
+	main()
