@@ -9,7 +9,7 @@ import RPi.GPIO as gp
 
 vorführung = True 
 
-im = open("/home/pi/Desktop/JugendForscht/Stop.png")
+im = open("/home/pi/Jufo_Bikelight/Release/Stop.png")
 pix = im.load()
 breite, höhe = im.size	#die Breite und die höhe des Bildes wird ausgelesen
 
@@ -26,15 +26,14 @@ ANZAHL_STREIFEN = 2			# Anzahl der verwendeten Led Streifen pro pin
 
 t = 1       # Zeitabschnitt  
 T = 2       # Umlaufzeit
-i = 0       # Variable für die for-Schleife
+i = 0       # Variable Für die for-Schleife
 minR = 5    # Mindestradius
 w = 0       # Winkelgeschwindigkeit
 
-# erschaffen einer Liste, in der drei Listen enthalten sind
-# matrix[0] = r; matrix[1] =
-matrix = [0 for x in range(0, LED_COUNT)]
+# erschaffen einer Liste
+radien = [0 for x in range(0, LED_COUNT/2)]
 for i in range(0, int(LED_COUNT/2)): # Erschaffen der Radien
-	matrix[0][i] = i+1+minR
+	radien[i] = i+1+minR
 
 
 def line(länge):
@@ -65,14 +64,14 @@ def startPrint():   # Startanzeige
 
 def bildAuslesen(alpha, rad):
 
-	x = int(round(cos(alpha) * rad + breite))   #Berechnung der X-Koordinate
-	y = int(round(sin(alpha) * rad + höhe))   #Berrechnung der Y Koordinate
+	x = int(round(cos(alpha) * rad + breite))   # Berechnung der X-Koordinate
+	y = int(round(sin(alpha) * rad + höhe))   	# Berechnung der Y Koordinate
 
-	r,g,b, _ = pix[x, y]                #auslesen eines Pixels
-	return Color(g, r, b)
+	r,g,b, _ = pix[x, y]		# auslesen eines Pixels
+	return Color(g, r, b)		# Rückgabe der RGB des Pixels
 
 def streifenBedienen():
-	global matrix
+	global radien
 	global T
 	global t
 	global streifen
@@ -80,20 +79,20 @@ def streifenBedienen():
 
 	alpha = w * t-pi/2 #ausrechnen des Winkels in Bogenmaß
 
-	if vorführung:
+	if vorführung:	#das Entstehende Bild wird für eine Vorführung um 180° gedreht
 		alpha+=pi
 
 	n = streifen.numPixels()
 	u = int(n/ANZAHL_STREIFEN)
 
 	for i in range(u):
-		u-=1
-		streifen.setPixelColor(i, bildAuslesen(alpha + pi, matrix[u]))
+		u-=1		#u wird heruntergezählt, da dieser Teil des Led Streifens gespiegelt ist
+		streifen.setPixelColor(i, bildAuslesen(alpha + pi, radien[u])) # alpha + pi, da dieser LED streifen gespiegelt ist
 
 	u = int(n/ANZAHL_STREIFEN)
 
 	for i in range(int(x /ANZAHL_STREIFEN), n):
-		streifen.setPixelColor(i, bildAuslesen(alpha, matrix[i-u]))
+		streifen.setPixelColor(i, bildAuslesen(alpha, radien[i-u]))
 
 	streifen.show()
 
@@ -105,7 +104,7 @@ def main():
 	global T 
 	global t
 	global t1
-	global matrix
+	global radien
 	global streifen
 	global w
 
@@ -122,9 +121,9 @@ def main():
 
 
 	while True:                             
-		t1 = time()                                 #startzeit der umdrehung t1
+		t1 = time()							#startzeit der umdrehung t1
 		
-		if gp.input(MAGNET_PIN) == False:       #Damit die Zeit nur einmal pro umdrehung gemessen wird
+		if gp.input(MAGNET_PIN) == False:	#Damit die Zeit nur einmal pro umdrehung gemessen wird
 			
 			w = 2 * pi / T 				#berrechnen der Aktuellen Winkelgeschwindigkeit
 			
