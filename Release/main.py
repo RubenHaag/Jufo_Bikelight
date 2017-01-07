@@ -31,9 +31,15 @@ minR = 5    # Mindestradius
 w = 0       # Winkelgeschwindigkeit
 
 # erschaffen einer Liste
+<<<<<<< HEAD
 radien = [0 for x in range(0, LED_COUNT/2)]
 for i in range(0, int(LED_COUNT/2)): # Erschaffen der Radien
 	radien[i] = i+1+minR
+=======
+radien = [0 for x in range(0, LED_COUNT)]
+for i in range(0, int(LED_COUNT/2)): # Erschaffen der Radien
+	radien[0][i] = i+1+minR
+>>>>>>> master
 
 
 def line(länge):
