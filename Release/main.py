@@ -14,14 +14,14 @@ pix = im.load()
 breite, höhe = im.size	#die Breite und die höhe des Bildes wird ausgelesen
 
 # LED strip configuration:
-LED_COUNT       = 70      	# Number of LED pixels.
+LED_COUNT       = 140      	# Number of LED pixels.
 LED_PIN         = 18      	# GPIO pin connected to the pixels (must support PWM!).
 MAGNET_PIN      = 17		# Nummer des Magnet Pins
 LED_FREQ_HZ     = 1000000  	# Frequenz der Led's in Hz
 LED_DMA         = 5       	# DMA Kanal, des Led pins(siehe C code der Library)
-LED_BRIGHTNESS  = 100     	# Set to 0 for darkest and 255 for brightest
+LED_BRIGHTNESS  = 250     	# Set to 0 for darkest and 255 for brightest
 LED_INVERT      = False		# Wenn ein transistor zwischengeschaltet ist Aktivieren
-ANZAHL_STREIFEN = 2			# Anzahl der verwendeten Led Streifen pro pin
+ANZAHL_STREIFEN = 4			# Anzahl der verwendeten Led Streifen pro pin
 
 
 t = 1       # Zeitabschnitt  
@@ -31,15 +31,11 @@ minR = 5    # Mindestradius
 w = 0       # Winkelgeschwindigkeit
 
 # erschaffen einer Liste
-<<<<<<< HEAD
-radien = [0 for x in range(0, LED_COUNT/2)]
+
+radien = [0 for x in range(0, int(LED_COUNT/2))]
 for i in range(0, int(LED_COUNT/2)): # Erschaffen der Radien
-	radien[i] = i+1+minR
-=======
-radien = [0 for x in range(0, LED_COUNT)]
-for i in range(0, int(LED_COUNT/2)): # Erschaffen der Radien
-	radien[0][i] = i+1+minR
->>>>>>> master
+	radien[i] = int(i+1+minR)
+
 
 
 def line(länge):
@@ -70,8 +66,8 @@ def startPrint():   # Startanzeige
 
 def bildAuslesen(alpha, rad):
 
-	x = int(round(cos(alpha) * rad + breite))   # Berechnung der X-Koordinate
-	y = int(round(sin(alpha) * rad + höhe))   	# Berechnung der Y Koordinate
+	x = int(round(cos(alpha) * rad + breite /2))   # Berechnung der X-Koordinate
+	y = int(round(sin(alpha) * rad + höhe   /2))   	# Berechnung der Y Koordinate
 
 	r,g,b, _ = pix[x, y]		# auslesen eines Pixels
 	return Color(g, r, b)		# Rückgabe der RGB des Pixels
@@ -90,15 +86,18 @@ def streifenBedienen():
 
 	n = streifen.numPixels()
 	u = int(n/ANZAHL_STREIFEN)
+	x = int(n/ANZAHL_STREIFEN)
 
 	for i in range(u):
 		u-=1		#u wird heruntergezählt, da dieser Teil des Led Streifens gespiegelt ist
 		streifen.setPixelColor(i, bildAuslesen(alpha + pi, radien[u])) # alpha + pi, da dieser LED streifen gespiegelt ist
+		streifen.setPixelColor(i + x, bildAuslesen(alpha - pi/2, radien[u]))
 
 	u = int(n/ANZAHL_STREIFEN)
 
-	for i in range(int(x /ANZAHL_STREIFEN), n):
+	for i in range(u, n):
 		streifen.setPixelColor(i, bildAuslesen(alpha, radien[i-u]))
+		streifen.setPixelColor(i + x, bildAuslesen(alpa + pi/2, radien [i-u]))
 
 	streifen.show()
 
