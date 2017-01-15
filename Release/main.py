@@ -105,18 +105,16 @@ def streifenBedienen():
 		u-=1		#u wird heruntergezählt, da dieser Teil des Led Streifens gespiegelt ist
 		#print("u=" + str(u))
 		streifen.setPixelColor(i, bildAuslesen(alpha, radien[u])) # alpha + pi, da dieser LED streifen gespiegelt ist
-		#streifen.setPixelColor(i + M, bildAuslesen(gamma + pi, radien[u]))
+		streifen.setPixelColor(i + M, bildAuslesen(gamma, radien[u]))
 
 	u = int(n/ANZAHL_STREIFEN)
 
 	for i in range(u, M):
 
 		#print(i-u)
-		#streifen.setPixelColor(i, bildAuslesen(beta, radien[i-u-1]))
+		streifen.setPixelColor(i, bildAuslesen(beta, radien[i-u-1]))
 		#print(i+M)
-		#streifen.setPixelColor(i + M, bildAuslesen(delta, radien [i-u-1]))
-		pass
-	streifen.show()
+		streifen.setPixelColor(i + M, bildAuslesen(delta, radien [i-u-1]))
 
 
 def main():
@@ -125,7 +123,6 @@ def main():
 	# Parameter zu übergeben
 	global T 
 	global t
-	global t1
 	global radien
 	global streifen
 	global w
@@ -150,9 +147,12 @@ def main():
 			w = 2 * pi / T 				#berrechnen der Aktuellen Winkelgeschwindigkeit
 			
 			while gp.input(MAGNET_PIN) == False:
-				t = time() - t1               #Ausrechnen der größe des Zeitabschnitts
+				t = time() - t1 			#Ausrechnen der größe des Zeitabschnitts
+				#print(t)
 				streifenBedienen()
+				streifen.show()
 		T = time() - t1                   #Ausrechnen von T nach T = t2 - t1
+		#print (T)
 
 if __name__ == '__main__':
 	main()
