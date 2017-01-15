@@ -6,20 +6,24 @@ from PIL.Image import open
 from neopixel import Adafruit_NeoPixel, Color
 from time import time, sleep
 import RPi.GPIO as gp
+#from numpy import array
 
-vorführung = True 
+vorführung = False
 
-im = open("/home/pi/Jufo_Bikelight/Release/Stop.png")
+im = open("/home/pi/Jufo_Bikelight/Release/TEST.png")
 pix = im.load()
+#pix = array(pixels)
 breite, höhe = im.size	#die Breite und die höhe des Bildes wird ausgelesen
+breite = breite /2 #damit der Koordinatenmittelpunkt in die mitte des Bildes Kommt
+höhe = höhe / 2 
 
 # LED strip configuration:
 LED_COUNT       = 140      	# Number of LED pixels.
 LED_PIN         = 18      	# GPIO pin connected to the pixels (must support PWM!).
 MAGNET_PIN      = 17		# Nummer des Magnet Pins
-LED_FREQ_HZ     = 1000000  	# Frequenz der Led's in Hz
+LED_FREQ_HZ     = 800000  	# Frequenz der Led's in Hz
 LED_DMA         = 5       	# DMA Kanal, des Led pins(siehe C code der Library)
-LED_BRIGHTNESS  = 250     	# Set to 0 for darkest and 255 for brightest
+LED_BRIGHTNESS  = 40    	# Set to 0 for darkest and 255 for brightest
 LED_INVERT      = False		# Wenn ein transistor zwischengeschaltet ist Aktivieren
 ANZAHL_STREIFEN = 4			# Anzahl der verwendeten Led Streifen pro pin
 
@@ -32,8 +36,8 @@ w = 0       # Winkelgeschwindigkeit
 
 # erschaffen einer Liste
 
-radien = [0 for x in range(0, int(LED_COUNT/2))]
-for i in range(0, int(LED_COUNT/2)): # Erschaffen der Radien
+radien = [0 for x in range(0, int(LED_COUNT/ANZAHL_STREIFEN))]
+for i in range(0, int(LED_COUNT/ANZAHL_STREIFEN)): # Erschaffen der Radien
 	radien[i] = int(i+1+minR)
 
 
@@ -64,54 +68,56 @@ def startPrint():   # Startanzeige
 	print("Drücke Strg-C zum beenden.")
 	line(50)
 
-def bildAuslesen(alpha, rad):
+def bildAuslesen(winkel, rad):
 
-	x = int(round(cos(alpha) * rad + breite /2))   # Berechnung der X-Koordinate
-	y = int(round(sin(alpha) * rad + höhe   /2))   	# Berechnung der Y Koordinate
+	x = int(round(cos(winkel) * rad + breite))   # Berechnung der X-Koordinate
+	y = int(round(sin(winkel) * rad + höhe))   	# Berechnung der Y Koordinate
+	#print("x =" + str(x))
+	#print("y =" + str(y))
+	#print("r =" + str(rad))
+	r,g,b = pix[x, y]		# auslesen eines Pixels
+	#print("r =" + str(r))
+	#print("g =" + str(g))
+	#print("b =" + str(b))
 
-	r,g,b, _ = pix[x, y]		# auslesen eines Pixels
 	return Color(g, r, b)		# Rückgabe der RGB des Pixels
 
-def streifenBedienen():
+def streifenBedienen(t, w):
 	global radien
-	global T
-	global t
 	global streifen
-	global w
 
-	alpha = w * t-pi/2 #ausrechnen des Winkels in Bogenmaß
+	alpha = w * t #ausrechnen des Winkels in Bogenmaß
+	beta  = alpha + pi / 2
+	gamma = beta  + pi / 2
+	delta = gamma + pi / 2
 
-	if vorführung:	#das Entstehende Bild wird für eine Vorführung um 180° gedreht
-		alpha+=pi
+	#if vorführung:	#das Entstehende Bild wird für eine Vorführung um 180° gedreht
+	#	alpha+=pi
 
 	n = streifen.numPixels()
 	u = int(n/ANZAHL_STREIFEN)
-	x = int(n/ANZAHL_STREIFEN)
+	M = int(n/2)
 
 	for i in range(u):
 		u-=1		#u wird heruntergezählt, da dieser Teil des Led Streifens gespiegelt ist
-		streifen.setPixelColor(i, bildAuslesen(alpha + pi, radien[u])) # alpha + pi, da dieser LED streifen gespiegelt ist
-		streifen.setPixelColor(i + x, bildAuslesen(alpha - pi/2, radien[u]))
+		#print("u=" + str(u))
+		streifen.setPixelColor(i, bildAuslesen(alpha, radien[u])) # alpha + pi, da dieser LED streifen gespiegelt ist
+		streifen.setPixelColor(i + M, bildAuslesen(gamma, radien[u]))
 
 	u = int(n/ANZAHL_STREIFEN)
 
-	for i in range(u, n):
-		streifen.setPixelColor(i, bildAuslesen(alpha, radien[i-u]))
-		streifen.setPixelColor(i + x, bildAuslesen(alpa + pi/2, radien [i-u]))
+	for i in range(u, M):
 
-	streifen.show()
+		#print(i-u)
+		streifen.setPixelColor(i, bildAuslesen(beta, radien[i-u-1]))
+		#print(i+M)
+		streifen.setPixelColor(i + M, bildAuslesen(delta, radien [i-u-1]))
 
 
 def main():
-	# Diese Variablen werden Global benötigt, da sie in mehreren Methoden benutzt werden
-	# Es ist Ressourcensparender die Variablen direkt zu globalisieren, als sie als
-	# Parameter zu übergeben
-	global T 
-	global t
-	global t1
 	global radien
 	global streifen
-	global w
+	T=2
 
 	gp.setmode(gp.BCM)          # Welche Nummern für die Pins verwendet werden
 	gp.setwarnings(False)       # Keine Warnungen
@@ -122,7 +128,7 @@ def main():
 	streifen = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
 
 	streifen.begin()    #initialisieren des LED-Streifens
-	startPrint()        #Drucken der Anfangseinstellungen
+	#startPrint()        #Drucken der Anfangseinstellungen
 
 
 	while True:                             
@@ -133,11 +139,13 @@ def main():
 			w = 2 * pi / T 				#berrechnen der Aktuellen Winkelgeschwindigkeit
 			
 			while gp.input(MAGNET_PIN) == False:
-				t = time() - t1               #Ausrechnen der größe des Zeitabschnitts
-				               
-				streifenBedienen()
+				t = time() - t1 			#Ausrechnen der größe des Zeitabschnitts
+				#print(t)
+				streifenBedienen(t, w)
+				streifen.show()
+			T = time() - t1              #Ausrechnen von T nach T = t2 - t1
 
-			T = time() - t1                   #Ausrechnen von T nach T = t2 - t1
+		
 
 if __name__ == '__main__':
 	main()
