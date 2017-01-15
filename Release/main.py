@@ -21,7 +21,7 @@ höhe = höhe / 2
 LED_COUNT       = 140      	# Number of LED pixels.
 LED_PIN         = 18      	# GPIO pin connected to the pixels (must support PWM!).
 MAGNET_PIN      = 17		# Nummer des Magnet Pins
-LED_FREQ_HZ     = 700000  	# Frequenz der Led's in Hz
+LED_FREQ_HZ     = 800000  	# Frequenz der Led's in Hz
 LED_DMA         = 5       	# DMA Kanal, des Led pins(siehe C code der Library)
 LED_BRIGHTNESS  = 40    	# Set to 0 for darkest and 255 for brightest
 LED_INVERT      = False		# Wenn ein transistor zwischengeschaltet ist Aktivieren
@@ -68,10 +68,10 @@ def startPrint():   # Startanzeige
 	print("Drücke Strg-C zum beenden.")
 	line(50)
 
-def bildAuslesen(alpha, rad):
+def bildAuslesen(winkel, rad):
 
-	x = int(round(cos(alpha) * rad + breite))   # Berechnung der X-Koordinate
-	y = int(round(sin(alpha) * rad + höhe))   	# Berechnung der Y Koordinate
+	x = int(round(cos(winkel) * rad + breite))   # Berechnung der X-Koordinate
+	y = int(round(sin(winkel) * rad + höhe))   	# Berechnung der Y Koordinate
 	#print("x =" + str(x))
 	#print("y =" + str(y))
 	#print("r =" + str(rad))
@@ -82,12 +82,9 @@ def bildAuslesen(alpha, rad):
 
 	return Color(g, r, b)		# Rückgabe der RGB des Pixels
 
-def streifenBedienen():
+def streifenBedienen(t, w):
 	global radien
-	global T
-	global t
 	global streifen
-	global w
 
 	alpha = w * t #ausrechnen des Winkels in Bogenmaß
 	beta  = alpha + pi / 2
@@ -118,14 +115,9 @@ def streifenBedienen():
 
 
 def main():
-	# Diese Variablen werden Global benötigt, da sie in mehreren Methoden benutzt werden
-	# Es ist Ressourcensparender die Variablen direkt zu globalisieren, als sie als
-	# Parameter zu übergeben
-	global T 
-	global t
 	global radien
 	global streifen
-	global w
+	T=2
 
 	gp.setmode(gp.BCM)          # Welche Nummern für die Pins verwendet werden
 	gp.setwarnings(False)       # Keine Warnungen
@@ -149,10 +141,11 @@ def main():
 			while gp.input(MAGNET_PIN) == False:
 				t = time() - t1 			#Ausrechnen der größe des Zeitabschnitts
 				#print(t)
-				streifenBedienen()
+				streifenBedienen(t, w)
 				streifen.show()
-		T = time() - t1                   #Ausrechnen von T nach T = t2 - t1
-		#print (T)
+			T = time() - t1              #Ausrechnen von T nach T = t2 - t1
+
+		
 
 if __name__ == '__main__':
 	main()
