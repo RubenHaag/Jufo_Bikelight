@@ -1,0 +1,67 @@
+\documentclass [a4paper, 11pt] {article}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{eurosym}
+\usepackage{textgreek}
+
+\begin{document}
+\tableofcontents
+\newpage
+\section{Einleitung}
+In Deutschland gibt es nach Daten des ZIV [1] 72 Millionen Fahrräder und 98\% der Deutschen können nach eigenen Angaben Fahrrad fahren [1]. Trotzdem würden nur 38\% der Deutschen mehrmals in der Woche ihr Rad nutzen [1]. Dies liegt nach eigener Erfahrung vor allem daran, dass man sich im Stadtverkehr in einem Auto sicherer fühlt, als auf einem Fahrrad. Natürlich kann man sich geeignete Kleidungsstücke, die die eigene Sichtbarkeit erhöhen, kaufen, aber diese sind meistens lästig und sind wenig modisch. Um diese Kleidungsstücke zu vermeiden, haben wir nach einer technisch besseren und interaktiveren Lösungsmöglichkeit gesucht. Wir dachten uns, dass die optimale Lösung ein Leuchtmittel zwischen den Speichen wäre und fanden bei unserer Suche eine ähnliche Lösungsmöglichkeiten. Bei dem Besuch der Website der Firma Monkeylectrics[2] haben wir etwas ähnliches gefunden: ein Speichendisplay, das jedoch mit rund 2000\euro\ [2] nur wenige Fahrradfahrer ansprechen würde. Da haben wir uns gefragt, wie ein solches Speichendisplay kostengünstiger und besser herzustellen ist. Die Grundidee war, dass wir mit einem Raspberry Pi einen LED-Streifen ansteuern. Danach haben wir uns einen 1m langen LED-Streifen gekauft, bei dem man jede Diode einzeln mit dem Raspberry Pi ansteuern kann. Der Streifen besitzt dabei eine Dichte von 144 LEDs je Meter und hat somit ausreichend viele LEDs, um ein Bild in ansprechender Auflösung darzustellen. Wir haben uns erhofft, eine interaktive Variante zur Warnweste zu finden, indem zum Beispiel beim überqueren einer Kreuzung vom Speichendisplay ein Stoppschild angezeigt wird, wodurch ein von der Seite kommender Autofahrer frühzeitig gewarnt wird. Dieses Speichendisplay soll zusätzlich kostengünstiger als andere Modelle sein.
+\section{Problemstellung}
+Die Sicherheit von Fahrradfahrern im Straßenverkehr soll durch ein hochauflösendes Speichendisplay für Fahrräder erhöht werden. Dabei sollen Bilder und Informationen mit der Außenwelt geteilt werden.
+\section{Vorgehensweise, Materialien und Methode}
+\subsection{Grundidee}
+Unsere Idee, um das Bild anzeigen zu können, ist, dass wir an einem Speichenrad mehrere LED-Streifen befestigen, die dann jeweils den Teil des Bildes darstellen, an dem sie sich momentan befinden. Die LED-Streifen rotieren dann mit dem Rad, was dazu führt, dass der Betrachter, aufgrund der Trägheit der Augen, ein vollständiges Bild wahrnimmt.
+Diesen Sachverhalt haben wir physikalisch folgendermaßen beschrieben:
+\subsection{Physikalische Beschreibung}
+Um für jeden Pixel die aktuellen Koordinaten zu berechnen, werden verschiedene physikalische Grundlagenrechnungen verwendet.
+Als erstes brauchen wir die Umlaufzeit T. Diese berechnen wir, indem die Zeitdifferenz der Umdrehung zwischen der Anfangszeit tAnfang, zu Beginn der Umdrehung, und der Endzeit tEnde , nach einer vollständigen Umdrehung, ermittelt wird:
+
+Die Winkelgeschwindigkeit \textomega\ des Reifens wird nun über die Winkeländerung pro Zeit berechnet. Da die Zeit für eine Umdrehung gemessen wird, entspricht die Winkeländerung in Radiant 2\textpi. Die Formel lautet demnach:
+
+Für die während der Umdrehung laufenden Berechnungen brauchen wir die Zeit, die seit Beginn der Umdrehung vergangen ist. Diese berechnen wir über die Zeitdifferenz \textDelta t zwischen der Anfangszeit tAnfang der Umdrehung und der momentanen Zeit tMomentan (für die genauere Beschreibung von tMomentan siehe Programm):
+
+Um nun damit den aktuellen Drehwinkel zu berechnen, stellen wir die Formel für die Winkelgeschwindigkeit (Formel A), diesmal aber für den Winkel \textalpha\  und die Zeitdifferenz \textDelta t, nach \textalpha\  um.  
+
+Damit jede LED eine Position bei einem bestimmten Winkel hat, haben wir uns überlegt die Bewegung in einem Koordinatensystem darzustellen. Um nun die Koordinaten einer LED zu berechnen, nutzen wir die beiden Grundgleichungen des Einheitskreises a = cos(\textalpha) und
+b = sin(\textalpha). Da diese jedoch für den Radius von 1 Längeneinheit gelten, multiplizieren wir diese noch mit dem Radius der anzusteuernden LED:
+
+Der Mittelpunkt des Koordinatensystems des Kreises, auf dem sich eine einzelne LED bewegt, ist noch auf dem Punkt A(0|0) (siehe Anhang Abb. 1). Das Problem ist nun, dass die Pixel nur positive Koordinaten haben. Dies lässt sich dadurch korrigieren, dass man zu den x-Koordinaten die Hälfte der Breite des Bildes und zu den y-Koordinaten die Hälfte der Höhe des Bildes addiert:
+
+Wir addieren die Hälfte der Höhe des Bildes und die Hälfte der Breite des Bildes, da dies die Mindestgröße ist, damit sich der Graph im ersten Quadranten befindet (siehe Anhang
+Abb. 2). Dadurch verändert sich der Mittelpunkt, wie auf Abb. 2 zu sehen ist, auf den Punkt M(35|35).
+Diese physikalischen Aspekte haben wir in unserem Programm folgendermaßen umgesetzt:
+\subsection{Programm}
+\subsection{Aufbau und Montage}
+\subsection{Welche midestgeschwindigkeit wird gebraucht?}
+Das menschliche Auge hat eine Bildwiederholfrequenz von durchschnittlich 20 - 30Hz. Der Reifen müsste sich also für ein stehendes Bild bei einem LED Streifen mindestens 20 mal in der Sekunde drehen. Um die dementsprehende Geschwindigkeit zu Berrechnen gehen wir davon aus, das ein standard 28" Fahrradreifen hätte mit Mantel und Schlauch einen durchmesser von ca. 610mm daraus haben wir mit folgender Formel den Umfang berrechnet:
+\begin{center}
+
+$ U = \pi * d $
+
+$ U = \pi * 61cm$ 
+
+$ U \approx 191,6cm$
+\end{center}
+Mit diesem kann man nun die Geschwindikkeit, die das Fahrrad 
+
+
+
+\section{Ergebnis}
+Uns ist es gelungen, eine interaktivere, stilvollere und zum gleichen Maße sichere Lösung, im Vergleich zu einer Warnweste zu bauen. Es ist damhingehend stilvoller, da man mit diesem Speichendisplay jedes Bild seiner Wahl anzeigen lassen kann, welches zusätzlich die Sicherheit eines Fahrradfahrers erhöht.
+Unser Speichendisplay ist dazu noch günstiger als vergleichbare Modelle. Wie man anhand der Auflistung der Kosten für Materialien sieht, beschränken sich die Materialkosten auf nur 113,07 \euro\ (siehe Anhang Tab. 1). Aufgrund der Trägheit des Auges des Betrachters und der konstant hohen Geschwindigkeit des Rades, entsteht für den Betrachter der Eindruck eines ruhenden Bildes. Somit gelingt es uns, ein scheinbar ruhendes Bild auf dem Speichendisplay zu produzieren. Es ist uns damit auch gelungen, ein Stoppschild und andere Verkehrszeichen auf dem Speichendisplay anzuzeigen.
+\section{Ergebnisdiskussion}
+Nach einem ersten Start unseres Programmes haben wir festgestellt, dass der Raspberry Pi Zero, den wir wegen seiner geringen Größe und seinem kaum spürbaren Gewicht verwenden wollten, viel zu langsam ist, um ein hochauflösendes Bild darzustellen. Der deutlich schnellere Raspberry Pi 3 machte hierbei einen viel besseren Eindruck. Dies sieht man auch auf den beiden Bildern:
+
+Aus diesem Grund haben wir uns für den schnelleren Raspberry Pi 3 entschieden, den wir auch in Zukunft weiter verwenden werden. Der passt jedoch leider in keine für uns momentan verfügbare wasserdichte Verteilerbox. Daher ist das Speichendisplay momentan an einem Fahrrad noch nicht voll einsetzbar.
+\subsection{Geplante Verbesserungen}
+Wir haben vor, unsere gesamte Apparatur wasserfest zu machen, damit man bei fast allen Wetterbedingungen mit dem Speichendisplay fahren kann. Im Laufe der weiteren Projektweiterentwicklung wollen wir die Fremdsoftware durch selbstentwickelte Software ersetzen, um dieses Projekt ganz unser Eigen nennen zu können. Zum Steuern des Raspberry Pi planen wir eine Smartphone-App zu entwickeln, damit das Bedienen des Raspberry Pi einfacher und leichter wird. Zusätzlich möchten wir insgesamt drei Magnetsensoren an das Rad montieren, um damit die Drehrichtung des Rades zu ermitteln. So können wir das Bild unabhängig von der Drehrichtung darstellen.
+\section{Zusammenfassung}
+Alles in allem ist das Speichendisplay eine interaktive, multifunktionale, kostengünstige und sicherheitsfördernde Anzeige, die jedoch noch kleine Kinderkrankheiten hat. Mit diesem Speichendisplay erhoffen wir uns, mehr Menschen zum Fahrradfahren, auch im Dunkeln, zu begeistern.
+\section{Quellen- und Literaturverzeichnis}
+\section{Danksagungen}
+Wir vom Projekt ?Speichendisplay? bedanken uns sehr bei der Fahrradwerkstatt der Holzkirche Lichterfelde für die Spende einer Fahrradgabel, ohne die unser Projekt nicht möglich gewesen wäre. Ebenfalls bedanken wir uns bei unserem Betreuer René Gorriz, der uns bei unserem Projekt tatkräftig unterstützt.
+\section{Anhang}
+\end{document}
