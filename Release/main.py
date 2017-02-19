@@ -6,21 +6,20 @@ from PIL.Image import open
 from neopixel import Adafruit_NeoPixel, Color
 from time import time, sleep
 import RPi.GPIO as gp
-#from numpy import array
 
-vorführung = False
 
-im = open("/home/pi/Jufo_Bikelight/Release/TEST.png")
+path = "/home/pi/Jufo_Bikelight/Release/Bilder/Herz.png"
+im = open(path)
 pix = im.load()
-#pix = array(pixels)
+
 breite, höhe = im.size	#die Breite und die höhe des Bildes wird ausgelesen
-breite = breite /2 #damit der Koordinatenmittelpunkt in die mitte des Bildes Kommt
+breite = breite /2 	#damit der Koordinatenmittelpunkt in die mitte des Bildes Kommt
 höhe = höhe / 2 
 
-# LED strip configuration:
+# Einstellung des LED-Streifens:
 LED_COUNT       = 140      	# Number of LED pixels.
 LED_PIN         = 18      	# GPIO pin connected to the pixels (must support PWM!).
-MAGNET_PIN      = 17		# Nummer des Magnet Pins
+MAGNET_PIN      = 17		# PIN des Magnetschalters
 LED_FREQ_HZ     = 800000  	# Frequenz der Led's in Hz
 LED_DMA         = 5       	# DMA Kanal, des Led pins(siehe C code der Library)
 LED_BRIGHTNESS  = 40    	# Set to 0 for darkest and 255 for brightest
@@ -34,8 +33,7 @@ i = 0       # Variable Für die for-Schleife
 minR = 5    # Mindestradius
 w = 0       # Winkelgeschwindigkeit
 
-# erschaffen einer Liste
-
+# erschaffen einer Liste ür die R Radien
 radien = [0 for x in range(0, int(LED_COUNT/ANZAHL_STREIFEN))]
 for i in range(0, int(LED_COUNT/ANZAHL_STREIFEN)): # Erschaffen der Radien
 	radien[i] = int(i+1+minR)
@@ -67,18 +65,20 @@ def startPrint():   # Startanzeige
 	line(50)
 	print("Drücke Strg-C zum beenden.")
 	line(50)
+	print("Aktuelle Geschwindigkeit:")
+	line(50)
+	print("xx km/h")
 
 def bildAuslesen(winkel, rad):
 
-	x = int(round(cos(winkel) * rad + breite))   # Berechnung der X-Koordinate
+	x = int(round(cos(winkel) * -rad + breite))   # Berechnung der X-Koordinate
 	y = int(round(sin(winkel) * rad + höhe))   	# Berechnung der Y Koordinate
-	#print("x =" + str(x))
-	#print("y =" + str(y))
-	#print("r =" + str(rad))
-	r,g,b = pix[x, y]		# auslesen eines Pixels
-	#print("r =" + str(r))
-	#print("g =" + str(g))
-	#print("b =" + str(b))
+
+	try: 
+		r,g,b = pix[x, y]		# auslesen eines Pixels
+	except:
+		r,g,b,_ = pix[x,y]
+
 
 	return Color(g, r, b)		# Rückgabe der RGB des Pixels
 
@@ -86,13 +86,11 @@ def streifenBedienen(t, w):
 	global radien
 	global streifen
 
-	alpha = w * t #ausrechnen des Winkels in Bogenmaß
+	alpha = w * t + pi/2 + pi/6 #ausrechnen des Winkels in Bogenmaß
 	beta  = alpha + pi / 2
 	gamma = beta  + pi / 2
 	delta = gamma + pi / 2
 
-	#if vorführung:	#das Entstehende Bild wird für eine Vorführung um 180° gedreht
-	#	alpha+=pi
 
 	n = streifen.numPixels()
 	u = int(n/ANZAHL_STREIFEN)
@@ -109,9 +107,9 @@ def streifenBedienen(t, w):
 	for i in range(u, M):
 
 		#print(i-u)
-		streifen.setPixelColor(i, bildAuslesen(beta, radien[i-u-1]))
+		streifen.setPixelColor(i, bildAuslesen(beta, radien[i-u]))
 		#print(i+M)
-		streifen.setPixelColor(i + M, bildAuslesen(delta, radien [i-u-1]))
+		streifen.setPixelColor(i + M, bildAuslesen(delta, radien [i-u]))
 
 
 def main():
@@ -128,10 +126,10 @@ def main():
 	streifen = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
 
 	streifen.begin()    #initialisieren des LED-Streifens
-	#startPrint()        #Drucken der Anfangseinstellungen
+	startPrint()        #Drucken der Anfangseinstellungen
 
 
-	while True:                             
+	while True:                         
 		t1 = time()							#startzeit der umdrehung t1
 		
 		if gp.input(MAGNET_PIN) == False:	#Damit die Zeit nur einmal pro umdrehung gemessen wird
@@ -140,11 +138,16 @@ def main():
 			
 			while gp.input(MAGNET_PIN) == False:
 				t = time() - t1 			#Ausrechnen der größe des Zeitabschnitts
-				#print(t)
-				streifenBedienen(t, w)
-				streifen.show()
-			T = time() - t1              #Ausrechnen von T nach T = t2 - t1
 
+				if t < 5:
+					streifenBedienen(t, w)
+					streifen.show()
+				else:
+					for i in range(0, LED_COUNT):
+						streifen.setPixelColor(i, Color(0,0,0))
+						streifen.show()
+			print("\b\b\b\b\b\b\b" + str(int(w * 0.3*3.6)) + " km/h")	
+			T = time() - t1              #Ausrechnen von T nach T = t2 - t1
 		
 
 if __name__ == '__main__':
