@@ -77,6 +77,7 @@ def bildAuslesen(winkel, rad):
 
 	x = int(round(cos(winkel) * rad + breite))   # Berechnung der X-Koordinate
 	y = int(round(sin(winkel) * rad + höhe))   	# Berechnung der Y Koordinate
+<<<<<<< Updated upstream
 
     try:
 		r,g,b = pix[x, y]		# auslesen eines Pixels
@@ -84,6 +85,17 @@ def bildAuslesen(winkel, rad):
 		r,g,b,_ = pix[x, y]
 
 
+=======
+<<<<<<< Updated upstream
+	#print("x =" + str(x))
+	#print("y =" + str(y))
+	#print("r =" + str(rad))
+	r,g,b = pix[x, y]		# auslesen eines Pixels
+	#print("r =" + str(r))
+	#print("g =" + str(g))
+	#print("b =" + str(b))
+=======
+>>>>>>> Stashed changes
 # Startanzeige
 
 def line(länge):
@@ -91,6 +103,15 @@ def line(länge):
 	for i in range(0, länge):
 		s += "-"
 	print(s)
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
+=======
+	
+	r,g,b = pix[x, y]		# Auslesen eines Pixels
+	
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
 def startPrint():   
 	str1 = "Led Bikelight"
@@ -115,7 +136,7 @@ def streifenBedienen(t, w):
 	global radien
 	global streifen
 
-	alpha = w * t #ausrechnen des Winkels in Bogenmaß
+	alpha = w * t #Ausrechnen des Winkels in Bogenmaß
 	beta  = alpha + pi / 2
 	gamma = beta  + pi / 2
 	delta = gamma + pi / 2
@@ -128,8 +149,14 @@ def streifenBedienen(t, w):
 	M = int(n/2)
 
 	for i in range(u):
+<<<<<<< Updated upstream
 		u-=1		#u wird heruntergezählt, da dieser Teil des Led Streifens gespiegelt ist
 		streifen.setPixelColor(i, bildAuslesen(alpha, radien[u])) # alpha + pi, da dieser LED streifen gespiegelt ist
+=======
+		u-=1		#u wird heruntergezählt, da dieser Teil des LED-Streifens gespiegelt ist
+		#print("u=" + str(u))
+		streifen.setPixelColor(i, bildAuslesen(alpha, radien[u])) # alpha + pi, da dieser LED-Streifen gespiegelt ist
+>>>>>>> Stashed changes
 		streifen.setPixelColor(i + M, bildAuslesen(gamma, radien[u]))
 
 	u = int(n/ANZAHL_STREIFEN)
