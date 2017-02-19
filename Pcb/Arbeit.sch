@@ -1,0 +1,228 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L R R2
+U 1 1 58A8AA56
+P 3650 3800
+F 0 "R2" V 3730 3800 50  0000 C CNN
+F 1 "R" V 3650 3800 50  0000 C CNN
+F 2 "" V 3580 3800 50  0000 C CNN
+F 3 "" H 3650 3800 50  0000 C CNN
+	1    3650 3800
+	-1   0    0    1   
+$EndComp
+$Comp
+L Battery BT1
+U 1 1 58A8AAF9
+P 3200 3300
+F 0 "BT1" H 3300 3350 50  0000 L CNN
+F 1 "Battery" H 3300 3250 50  0000 L CNN
+F 2 "" V 3200 3340 50  0000 C CNN
+F 3 "" V 3200 3340 50  0000 C CNN
+	1    3200 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L USB_A P2
+U 1 1 58A8ACF1
+P 4250 1750
+F 0 "P2" H 4450 1550 50  0000 C CNN
+F 1 "USB_A" H 4200 1950 50  0000 C CNN
+F 2 "" V 4200 1650 50  0000 C CNN
+F 3 "" V 4200 1650 50  0000 C CNN
+	1    4250 1750
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R1
+U 1 1 58A8AE35
+P 3500 2550
+F 0 "R1" V 3580 2550 50  0000 C CNN
+F 1 "R" V 3500 2550 50  0000 C CNN
+F 2 "" V 3430 2550 50  0000 C CNN
+F 3 "" H 3500 2550 50  0000 C CNN
+	1    3500 2550
+	0    -1   -1   0   
+$EndComp
+$Comp
+L CONN_01X04 P3
+U 1 1 58A8AF84
+P 4250 2900
+F 0 "P3" H 4250 3150 50  0000 C CNN
+F 1 "CONN_01X04" V 4350 2900 50  0000 C CNN
+F 2 "" H 4250 2900 50  0000 C CNN
+F 3 "" H 4250 2900 50  0000 C CNN
+	1    4250 2900
+	1    0    0    -1  
+$EndComp
+$Comp
+L USB_A P1
+U 1 1 58A8B15A
+P 2950 2650
+F 0 "P1" H 3150 2450 50  0000 C CNN
+F 1 "USB_A" H 2900 2850 50  0000 C CNN
+F 2 "" V 2900 2550 50  0000 C CNN
+F 3 "" V 2900 2550 50  0000 C CNN
+	1    2950 2650
+	1    0    0    -1  
+$EndComp
+$Comp
+L USB_A P4
+U 1 1 58A8B1A7
+P 4350 3700
+F 0 "P4" H 4550 3500 50  0000 C CNN
+F 1 "USB_A" H 4300 3900 50  0000 C CNN
+F 2 "" V 4300 3600 50  0000 C CNN
+F 3 "" V 4300 3600 50  0000 C CNN
+	1    4350 3700
+	1    0    0    -1  
+$EndComp
+$Comp
+L USB_A P5
+U 1 1 58A8B209
+P 5750 2850
+F 0 "P5" H 5950 2650 50  0000 C CNN
+F 1 "USB_A" H 5700 3050 50  0000 C CNN
+F 2 "" V 5700 2750 50  0000 C CNN
+F 3 "" V 5700 2750 50  0000 C CNN
+	1    5750 2850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3050 2950 3050 3050
+Wire Wire Line
+	3050 3050 4050 3050
+Wire Wire Line
+	4450 4000 4700 4000
+Wire Wire Line
+	4700 4000 4700 3300
+Wire Wire Line
+	4700 3300 4050 3300
+Wire Wire Line
+	4050 3050 4050 3450
+Wire Wire Line
+	4350 2000 4350 2350
+Wire Wire Line
+	4350 2350 3750 2350
+Wire Wire Line
+	3750 2350 3750 3050
+Connection ~ 3750 3050
+Wire Wire Line
+	5850 3150 5850 3250
+Wire Wire Line
+	5850 3250 4050 3250
+Connection ~ 4050 3250
+Wire Wire Line
+	4050 3450 3200 3450
+Wire Wire Line
+	4050 3250 4050 3300
+Connection ~ 4050 3300
+Wire Wire Line
+	3200 3150 3200 2750
+Wire Wire Line
+	3200 2750 4050 2750
+Wire Wire Line
+	2750 2950 2750 3150
+Wire Wire Line
+	2750 3150 3200 3150
+Wire Wire Line
+	3900 4000 4150 4000
+Wire Wire Line
+	3900 2150 3900 4000
+Connection ~ 3900 2750
+Wire Wire Line
+	4050 2050 4050 2150
+Wire Wire Line
+	4050 2150 3900 2150
+Wire Wire Line
+	5550 3150 3900 3150
+Connection ~ 3900 3150
+Wire Wire Line
+	4250 4000 4250 4100
+Wire Wire Line
+	4250 4100 2950 4100
+Wire Wire Line
+	2950 4100 2950 2950
+Wire Wire Line
+	2850 2950 2850 3100
+Wire Wire Line
+	2850 3100 2550 3100
+Wire Wire Line
+	2550 3100 2550 2250
+Wire Wire Line
+	2550 2250 4250 2250
+Wire Wire Line
+	4250 2250 4250 2050
+Wire Wire Line
+	4150 2050 4150 2600
+Wire Wire Line
+	4150 2600 5400 2600
+Wire Wire Line
+	5400 2600 5400 3200
+Wire Wire Line
+	5400 3200 5750 3200
+Wire Wire Line
+	5750 3200 5750 3150
+Wire Wire Line
+	4050 2950 3650 2950
+Wire Wire Line
+	3650 4050 4350 4050
+Wire Wire Line
+	4350 4050 4350 4000
+Wire Wire Line
+	3650 2950 3650 3650
+Wire Wire Line
+	3650 3950 3650 4050
+Wire Wire Line
+	3650 2850 4050 2850
+NoConn ~ 6050 2750
+NoConn ~ 4500 1650
+NoConn ~ 4650 3600
+Wire Wire Line
+	3250 2550 3350 2550
+Wire Wire Line
+	3650 2550 3650 2850
+NoConn ~ 5650 3150
+$EndSCHEMATC
