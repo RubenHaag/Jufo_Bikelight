@@ -6,13 +6,13 @@ from PIL.Image import open
 from neopixel import Adafruit_NeoPixel, Color
 import RPi.GPIO as gp
 
-im = open("/home/pi/Jufo_Bikelight/Release/TEST.png")
+im = open("/home/pi/Jufo_Bikelight/Release/Ihr_Bild_hier.png")
 pix = im.load()
 breite, höhe = im.size	#die Breite und die Höhe des Bildes wird ausgelesen
 breite = breite / 2
 höhe = höhe / 2 
 
-<<<<<<< Updated upstream
+
 # LED strip configuration:
 LED_COUNT       = 140      	# Number of LED pixels.
 LED_PIN         = 18      	# GPIO pin connected to the pixels (must support PWM!).
@@ -22,9 +22,6 @@ LED_DMA         = 5       	# DMA Kanal, des Led pins(siehe C code der Library)
 LED_BRIGHTNESS  = 40    	# Set to 0 for darkest and 255 for brightest
 LED_INVERT      = False		# Wenn ein transistor zwischengeschaltet ist Aktivieren
 ANZAHL_STREIFEN = 4			# Anzahl der verwendeten Led Streifen pro pin
-
-=======
->>>>>>> Stashed changes
 
 # LED-Streifen-Konfiguration:
 LED_COUNT       = 140      	# LED-Anzahl.
@@ -75,19 +72,18 @@ def startPrint():
 	print("Drücke Strg-C zum beenden.")
 	line(50)
 
-<<<<<<< Updated upstream
+
 def bildAuslesen(winkel, rad):
 
 	x = int(round(cos(winkel) * rad + breite))   # Berechnung der X-Koordinate
 	y = int(round(sin(winkel) * rad + höhe))   	# Berechnung der Y Koordinate
-	#print("x =" + str(x))
-	#print("y =" + str(y))
-	#print("r =" + str(rad))
-	r,g,b = pix[x, y]		# auslesen eines Pixels
-	#print("r =" + str(r))
-	#print("g =" + str(g))
-	#print("b =" + str(b))
-=======
+
+    try:
+		r,g,b = pix[x, y]		# auslesen eines Pixels
+	except:
+		r,g,b,_ = pix[x, y]
+
+
 # Startanzeige
 
 def line(länge):
@@ -95,7 +91,6 @@ def line(länge):
 	for i in range(0, länge):
 		s += "-"
 	print(s)
->>>>>>> Stashed changes
 
 def startPrint():   
 	str1 = "Led Bikelight"
@@ -116,7 +111,6 @@ def startPrint():
 	print("Drücke Strg-C zum beenden.")
 	line(50)
 
-<<<<<<< Updated upstream
 def streifenBedienen(t, w):
 	global radien
 	global streifen
@@ -135,7 +129,6 @@ def streifenBedienen(t, w):
 
 	for i in range(u):
 		u-=1		#u wird heruntergezählt, da dieser Teil des Led Streifens gespiegelt ist
-		#print("u=" + str(u))
 		streifen.setPixelColor(i, bildAuslesen(alpha, radien[u])) # alpha + pi, da dieser LED streifen gespiegelt ist
 		streifen.setPixelColor(i + M, bildAuslesen(gamma, radien[u]))
 
@@ -143,11 +136,10 @@ def streifenBedienen(t, w):
 
 	for i in range(u, M):
 
-		#print(i-u)
 		streifen.setPixelColor(i, bildAuslesen(beta, radien[i-u-1]))
-		#print(i+M)
+
 		streifen.setPixelColor(i + M, bildAuslesen(delta, radien [i-u-1]))
-=======
+
 def streifenBedienen():
     global radien
     global T
@@ -170,7 +162,6 @@ def streifenBedienen():
         streifen.setPixelColor(i, bildAuslesen(gamma, radien[u])) 
 		
     u = int(n/ANZAHL_STREIFEN)
->>>>>>> Stashed changes
 
     for i in range(u, M):
         streifen.setPixelColor(i, bildAuslesen(beta, radien[i-u]))
@@ -178,7 +169,6 @@ def streifenBedienen():
     streifen.show()
 
 def main():
-<<<<<<< Updated upstream
 	global radien
 	global streifen
 	T=2
@@ -186,9 +176,7 @@ def main():
 	gp.setmode(gp.BCM)          # Welche Nummern für die Pins verwendet werden
 	gp.setwarnings(False)       # Keine Warnungen
 	gp.setup(MAGNET_PIN, gp.IN) # Anschluss
-=======
-	# Global benötigt, da sie in mehreren Methoden benutzt werden
-	# Es ist Ressourcensparender die Variablen direkt zu globalisieren, als sie als Parameter zu übergeben
+
     global T 
     global t
     global t1
@@ -199,8 +187,6 @@ def main():
     gp.setmode(gp.BCM)          # GPIO-Nummern verwenden
     gp.setwarnings(False)       # Keine Warnungen
     gp.setup(MAGNET_PIN, gp.IN) # Anschluss
->>>>>>> Stashed changes
-
 	
     #Erschaffen des Led-Streifen-Objekts
     streifen = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, 
@@ -217,7 +203,6 @@ def main():
 			
             w = 2 * pi / T 	#Berrechnen der Aktuellen Winkelgeschwindigkeit
 			
-<<<<<<< Updated upstream
 			while gp.input(MAGNET_PIN) == False:
 				t = time() - t1 			#Ausrechnen der größe des Zeitabschnitts
 				#print(t)
@@ -226,12 +211,11 @@ def main():
 			T = time() - t1              #Ausrechnen von T nach T = t2 - t1
 
 		
-=======
 		while gp.input(MAGNET_PIN) == False:
 		    t = time() - t1   #Größe des Zeitabschnitts
 		    streifenBedienen()
 	  T = time() - t1                   #Ausrechnen von T nach T = t2 - t1
->>>>>>> Stashed changes
-
+	print (w * 0,3556)
+	
 if __name__ == '__main__':
     main()
