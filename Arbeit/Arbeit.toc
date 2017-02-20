@@ -3,14 +3,25 @@
 \contentsline {section}{\numberline {2}Problemstellung}{2}
 \contentsline {section}{\numberline {3}Vorgehensweise, Materialien und Methode}{2}
 \contentsline {subsection}{\numberline {3.1}Grundidee}{2}
-\contentsline {subsection}{\numberline {3.2}Physikalische Beschreibung}{3}
-\contentsline {subsection}{\numberline {3.3}Programm}{3}
-\contentsline {subsection}{\numberline {3.4}Aufbau und Montage}{3}
-\contentsline {subsection}{\numberline {3.5}Welche midestgeschwindigkeit wird gebraucht?}{3}
-\contentsline {section}{\numberline {4}Ergebnis}{4}
-\contentsline {section}{\numberline {5}Ergebnisdiskussion}{4}
-\contentsline {subsection}{\numberline {5.1}Geplante Verbesserungen}{4}
-\contentsline {section}{\numberline {6}Zusammenfassung}{5}
-\contentsline {section}{\numberline {7}Quellen- und Literaturverzeichnis}{5}
-\contentsline {section}{\numberline {8}Danksagungen}{5}
-\contentsline {section}{\numberline {9}Anhang}{5}
+\contentsline {subsection}{\numberline {3.2}Ansteuerung des Led Streifens}{2}
+\contentsline {subsection}{\numberline {3.3}Physikalische Beschreibung}{3}
+\contentsline {subsection}{\numberline {3.4}Programm}{4}
+\contentsline {subsubsection}{\numberline {3.4.1}Programmabschnitt 1}{4}
+\contentsline {subsubsection}{\numberline {3.4.2}Programmabschnitt 2}{4}
+\contentsline {subsubsection}{\numberline {3.4.3}Programmabschnitt 3}{5}
+\contentsline {subsubsection}{\numberline {3.4.4}Programmabschnitt 4}{6}
+\contentsline {subsubsection}{\numberline {3.4.5}Programmabschnitt 5}{6}
+\contentsline {subsubsection}{\numberline {3.4.6}Programmabschnitt 6}{7}
+\contentsline {subsubsection}{\numberline {3.4.7}Programmabschnitt 7}{7}
+\contentsline {subsection}{\numberline {3.5}Aufbau und Montage}{7}
+\contentsline {subsubsection}{\numberline {3.5.1}Installation des Raspberry Pi{'}s}{7}
+\contentsline {subsubsection}{\numberline {3.5.2}Aufbau und Funktion des ersten Tests mit dem LED-Streifen}{9}
+\contentsline {subsection}{\numberline {3.6}Welche Mindestgeschwindigkeit wird gebraucht?}{9}
+\contentsline {section}{\numberline {4}Ergebnis}{10}
+\contentsline {subsection}{\numberline {4.1}Ergebnisdiskussion}{10}
+\contentsline {subsection}{\numberline {4.2}Geplante Verbesserungen}{10}
+\contentsline {section}{\numberline {5}Zusammenfassung}{11}
+\contentsline {section}{\numberline {6}Anhang}{11}
+\contentsline {subsection}{\numberline {6.1}Quellen- und Literaturverzeichnis}{11}
+\contentsline {subsection}{\numberline {6.2}Danksagungen}{13}
+\contentsline {subsection}{\numberline {6.3}Kostenkalkulation und Materialliste}{13}
