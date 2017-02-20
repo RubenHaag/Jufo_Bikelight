@@ -9,20 +9,20 @@
 \contentsline {subsection}{\numberline {3.5}Programm}{5}
 \contentsline {subsubsection}{\numberline {3.5.1}Programmabschnitt 1}{6}
 \contentsline {subsubsection}{\numberline {3.5.2}Programmabschnitt 2}{6}
-\contentsline {subsubsection}{\numberline {3.5.3}Programmabschnitt 3}{6}
-\contentsline {subsubsection}{\numberline {3.5.4}Programmabschnitt 4}{6}
-\contentsline {subsubsection}{\numberline {3.5.5}Programmabschnitt 5}{7}
-\contentsline {subsubsection}{\numberline {3.5.6}Programmabschnitt 6}{8}
-\contentsline {subsubsection}{\numberline {3.5.7}Programmabschnitt 7}{8}
-\contentsline {subsection}{\numberline {3.6}Aufbau und Montage}{8}
-\contentsline {subsubsection}{\numberline {3.6.1}Installation des Raspberry Pi{'}s}{8}
-\contentsline {subsubsection}{\numberline {3.6.2}Aufbau und Funktion des ersten Tests mit dem LED-Streifen}{9}
-\contentsline {subsection}{\numberline {3.7}Welche Mindestgeschwindigkeit wird gebraucht?}{10}
-\contentsline {section}{\numberline {4}Ergebnis}{10}
-\contentsline {subsection}{\numberline {4.1}Ergebnisdiskussion}{11}
-\contentsline {subsection}{\numberline {4.2}Geplante Verbesserungen}{12}
-\contentsline {section}{\numberline {5}Zusammenfassung}{12}
-\contentsline {section}{\numberline {6}Anhang}{12}
-\contentsline {subsection}{\numberline {6.1}Quellen- und Literaturverzeichnis}{12}
-\contentsline {subsection}{\numberline {6.2}Danksagungen}{13}
-\contentsline {subsection}{\numberline {6.3}Kostenkalkulation und Materialliste}{13}
+\contentsline {subsubsection}{\numberline {3.5.3}Programmabschnitt 3}{7}
+\contentsline {subsubsection}{\numberline {3.5.4}Programmabschnitt 4}{8}
+\contentsline {subsubsection}{\numberline {3.5.5}Programmabschnitt 5}{8}
+\contentsline {subsubsection}{\numberline {3.5.6}Programmabschnitt 6}{9}
+\contentsline {subsubsection}{\numberline {3.5.7}Programmabschnitt 7}{10}
+\contentsline {subsection}{\numberline {3.6}Aufbau und Montage}{10}
+\contentsline {subsubsection}{\numberline {3.6.1}Installation des Raspberry Pi{'}s}{10}
+\contentsline {subsubsection}{\numberline {3.6.2}Aufbau und Funktion des ersten Tests mit dem LED-Streifen}{12}
+\contentsline {subsection}{\numberline {3.7}Welche Mindestgeschwindigkeit wird gebraucht?}{12}
+\contentsline {section}{\numberline {4}Ergebnis}{13}
+\contentsline {subsection}{\numberline {4.1}Ergebnisdiskussion}{13}
+\contentsline {subsection}{\numberline {4.2}Geplante Verbesserungen}{14}
+\contentsline {section}{\numberline {5}Zusammenfassung}{14}
+\contentsline {section}{\numberline {6}Anhang}{14}
+\contentsline {subsection}{\numberline {6.1}Quellen- und Literaturverzeichnis}{14}
+\contentsline {subsection}{\numberline {6.2}Danksagungen}{15}
+\contentsline {subsection}{\numberline {6.3}Kostenkalkulation und Materialliste}{16}
