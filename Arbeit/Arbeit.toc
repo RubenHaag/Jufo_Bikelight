@@ -3,25 +3,26 @@
 \contentsline {section}{\numberline {2}Problemstellung}{2}
 \contentsline {section}{\numberline {3}Vorgehensweise, Materialien und Methode}{2}
 \contentsline {subsection}{\numberline {3.1}Grundidee}{2}
-\contentsline {subsection}{\numberline {3.2}Ansteuerung des Led Streifens}{2}
-\contentsline {subsection}{\numberline {3.3}Physikalische Beschreibung}{3}
-\contentsline {subsection}{\numberline {3.4}Programm}{4}
-\contentsline {subsubsection}{\numberline {3.4.1}Programmabschnitt 1}{4}
-\contentsline {subsubsection}{\numberline {3.4.2}Programmabschnitt 2}{4}
-\contentsline {subsubsection}{\numberline {3.4.3}Programmabschnitt 3}{5}
-\contentsline {subsubsection}{\numberline {3.4.4}Programmabschnitt 4}{6}
-\contentsline {subsubsection}{\numberline {3.4.5}Programmabschnitt 5}{6}
-\contentsline {subsubsection}{\numberline {3.4.6}Programmabschnitt 6}{7}
-\contentsline {subsubsection}{\numberline {3.4.7}Programmabschnitt 7}{7}
-\contentsline {subsection}{\numberline {3.5}Aufbau und Montage}{7}
-\contentsline {subsubsection}{\numberline {3.5.1}Installation des Raspberry Pi{'}s}{7}
-\contentsline {subsubsection}{\numberline {3.5.2}Aufbau und Funktion des ersten Tests mit dem LED-Streifen}{9}
-\contentsline {subsection}{\numberline {3.6}Welche Mindestgeschwindigkeit wird gebraucht?}{9}
+\contentsline {subsection}{\numberline {3.2}Physikalische Beschreibung}{2}
+\contentsline {subsection}{\numberline {3.3}Welche Mindestgeschwindigkeit wird gebraucht?}{4}
+\contentsline {subsection}{\numberline {3.4}Ansteuerung des Led Streifens}{5}
+\contentsline {subsection}{\numberline {3.5}Programm}{5}
+\contentsline {subsubsection}{\numberline {3.5.1}Programmabschnitt 1}{6}
+\contentsline {subsubsection}{\numberline {3.5.2}Programmabschnitt 2}{6}
+\contentsline {subsubsection}{\numberline {3.5.3}Programmabschnitt 3}{6}
+\contentsline {subsubsection}{\numberline {3.5.4}Programmabschnitt 4}{6}
+\contentsline {subsubsection}{\numberline {3.5.5}Programmabschnitt 5}{7}
+\contentsline {subsubsection}{\numberline {3.5.6}Programmabschnitt 6}{8}
+\contentsline {subsubsection}{\numberline {3.5.7}Programmabschnitt 7}{8}
+\contentsline {subsection}{\numberline {3.6}Aufbau und Montage}{8}
+\contentsline {subsubsection}{\numberline {3.6.1}Installation des Raspberry Pi{'}s}{8}
+\contentsline {subsubsection}{\numberline {3.6.2}Aufbau und Funktion des ersten Tests mit dem LED-Streifen}{9}
+\contentsline {subsection}{\numberline {3.7}Welche Mindestgeschwindigkeit wird gebraucht?}{10}
 \contentsline {section}{\numberline {4}Ergebnis}{10}
-\contentsline {subsection}{\numberline {4.1}Ergebnisdiskussion}{10}
-\contentsline {subsection}{\numberline {4.2}Geplante Verbesserungen}{10}
-\contentsline {section}{\numberline {5}Zusammenfassung}{11}
-\contentsline {section}{\numberline {6}Anhang}{11}
-\contentsline {subsection}{\numberline {6.1}Quellen- und Literaturverzeichnis}{11}
+\contentsline {subsection}{\numberline {4.1}Ergebnisdiskussion}{11}
+\contentsline {subsection}{\numberline {4.2}Geplante Verbesserungen}{12}
+\contentsline {section}{\numberline {5}Zusammenfassung}{12}
+\contentsline {section}{\numberline {6}Anhang}{12}
+\contentsline {subsection}{\numberline {6.1}Quellen- und Literaturverzeichnis}{12}
 \contentsline {subsection}{\numberline {6.2}Danksagungen}{13}
 \contentsline {subsection}{\numberline {6.3}Kostenkalkulation und Materialliste}{13}
