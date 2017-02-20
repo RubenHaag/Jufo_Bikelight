@@ -28,7 +28,7 @@ Eine Led des LED-Streifens wird durch ein 24bit Signal angesteuert, das mittels 
 	\includegraphics[width=15cm]{AufbauDer24BitAnsteuerungDesStreifens.png}
 	\caption{Reihenfolge der Bits bei der Ansteuerung einer LED des LED-streifens}
 \end{figure}
-Falls nach diesem 24Bit Signal, innerhalb der Taktung von  noch weitere Signale an den LED-Streifen übertragen werden, so 
+Falls nach diesem 24Bit Signal, innerhalb der Taktung von  noch weitere Signale an den LED-Streifen übertragen werden, so werden diese an die zweite LED übertragen, die wiederum nur die ersten 24bit für sich selbst übernimmt und den Rest weiterschickt.
 
 \subsection{Physikalische Beschreibung}
 Um für jeden Pixel die aktuellen Koordinaten zu berechnen, werden verschiedene physikalische Grundlagenrechnungen verwendet.
