@@ -1,19 +1,12 @@
 \select@language {ngerman}
-\contentsline {section}{\numberline {1}Einleitung}{2}
-\contentsline {section}{\numberline {2}Problemstellung}{2}
-\contentsline {section}{\numberline {3}Vorgehensweise, Materialien und Methode}{2}
-\contentsline {subsection}{\numberline {3.1}Grundidee}{2}
-\contentsline {subsection}{\numberline {3.2}Physikalische Beschreibung}{2}
-\contentsline {subsection}{\numberline {3.3}Welche Mindestgeschwindigkeit wird gebraucht?}{4}
+\contentsline {section}{\numberline {1}Einleitung}{3}
+\contentsline {section}{\numberline {2}Problemstellung}{3}
+\contentsline {section}{\numberline {3}Vorgehensweise, Materialien und Methode}{3}
+\contentsline {subsection}{\numberline {3.1}Grundidee}{3}
+\contentsline {subsection}{\numberline {3.2}Physikalische Beschreibung}{3}
+\contentsline {subsection}{\numberline {3.3}Welche Mindestgeschwindigkeit wird gebraucht?}{5}
 \contentsline {subsection}{\numberline {3.4}Ansteuerung des Led Streifens}{5}
-\contentsline {subsection}{\numberline {3.5}Programm}{5}
-\contentsline {subsubsection}{\numberline {3.5.1}Programmabschnitt 1}{6}
-\contentsline {subsubsection}{\numberline {3.5.2}Programmabschnitt 2}{6}
-\contentsline {subsubsection}{\numberline {3.5.3}Programmabschnitt 3}{7}
-\contentsline {subsubsection}{\numberline {3.5.4}Programmabschnitt 4}{8}
-\contentsline {subsubsection}{\numberline {3.5.5}Programmabschnitt 5}{8}
-\contentsline {subsubsection}{\numberline {3.5.6}Programmabschnitt 6}{9}
-\contentsline {subsubsection}{\numberline {3.5.7}Programmabschnitt 7}{10}
+\contentsline {subsection}{\numberline {3.5}Programm}{6}
 \contentsline {subsection}{\numberline {3.6}Aufbau und Montage}{11}
 \contentsline {subsubsection}{\numberline {3.6.1}Installation des Raspberry Pi{'}s}{11}
 \contentsline {subsubsection}{\numberline {3.6.2}Aufbau und Funktion des ersten Tests mit dem LED-Streifen}{12}
