@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.2.18)  22 FEB 2017 21:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.2.18)  22 FEB 2017 21:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1088,60 +1088,60 @@ Underfull \hbox (badness 10000) in paragraph at lines 76--76
 File: rgbtabelle.png Graphic file (type png)
 
 <use rgbtabelle.png>
-Package pdftex.def Info: rgbtabelle.png used on input line 92.
+Package pdftex.def Info: rgbtabelle.png used on input line 91.
 (pdftex.def)             Requested size: 455.24408pt x 21.72429pt.
 
 <Schaltplan_des_LED-Streifens.png, id=37, 292.09125pt x 448.67625pt>
 File: Schaltplan_des_LED-Streifens.png Graphic file (type png)
 
 <use Schaltplan_des_LED-Streifens.png>
-Package pdftex.def Info: Schaltplan_des_LED-Streifens.png used on input line 99
+Package pdftex.def Info: Schaltplan_des_LED-Streifens.png used on input line 98
 .
 (pdftex.def)             Requested size: 113.81102pt x 174.82556pt.
  <P1.png, id=38, 803.0pt x 401.5pt>
 File: P1.png Graphic file (type png)
 
 <use P1.png>
-Package pdftex.def Info: P1.png used on input line 110.
+Package pdftex.def Info: P1.png used on input line 109.
 (pdftex.def)             Requested size: 455.24408pt x 227.62596pt.
  [5 <./rgbtabelle.png> <./Schaltplan_des_LED-Streifens.png>]
 <P2.png, id=43, 803.0pt x 85.31876pt>
 File: P2.png Graphic file (type png)
  <use P2.png>
-Package pdftex.def Info: P2.png used on input line 119.
+Package pdftex.def Info: P2.png used on input line 118.
 (pdftex.def)             Requested size: 455.24408pt x 48.3705pt.
  [6 <./P1.png>]
 <P4.png, id=47, 802.49812pt x 174.15062pt>
 File: P4.png Graphic file (type png)
  <use P4.png>
-Package pdftex.def Info: P4.png used on input line 132.
+Package pdftex.def Info: P4.png used on input line 131.
 (pdftex.def)             Requested size: 455.24408pt x 98.79387pt.
 
 <P5.png, id=48, 1606.0pt x 1013.7875pt>
 File: P5.png Graphic file (type png)
  <use P5.png>
-Package pdftex.def Info: P5.png used on input line 141.
+Package pdftex.def Info: P5.png used on input line 140.
 (pdftex.def)             Requested size: 455.24408pt x 287.37006pt.
  [7 <./P2.png> <./P4.png>]
 <P6.png, id=54, 803.50188pt x 684.05562pt>
 File: P6.png Graphic file (type png)
  <use P6.png>
-Package pdftex.def Info: P6.png used on input line 148.
+Package pdftex.def Info: P6.png used on input line 147.
 (pdftex.def)             Requested size: 455.24408pt x 387.57768pt.
  [8 <./P5.png>]
 <P7.png, id=58, 804.00375pt x 43.66313pt>
 File: P7.png Graphic file (type png)
  <use P7.png>
-Package pdftex.def Info: P7.png used on input line 155.
+Package pdftex.def Info: P7.png used on input line 154.
 (pdftex.def)             Requested size: 455.24408pt x 24.72299pt.
 
 <u.png, id=59, 285.065pt x 253.748pt>
 File: u.png Graphic file (type png)
  <use u.png>
-Package pdftex.def Info: u.png used on input line 165.
+Package pdftex.def Info: u.png used on input line 164.
 (pdftex.def)             Requested size: 284.52756pt x 253.27112pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 160--168
+Underfull \hbox (badness 10000) in paragraph at lines 159--167
 
  []
 
@@ -1149,93 +1149,93 @@ Underfull \hbox (badness 10000) in paragraph at lines 160--168
 <Rad.png, id=67, 741.77126pt x 384.93813pt>
 File: Rad.png Graphic file (type png)
  <use Rad.png>
-Package pdftex.def Info: Rad.png used on input line 177.
+Package pdftex.def Info: Rad.png used on input line 176.
 (pdftex.def)             Requested size: 270.30118pt x 140.26923pt.
 
 <Stopschild.png, id=68, 300.62312pt x 310.66063pt>
 File: Stopschild.png Graphic file (type png)
  <use Stopschild.png>
-Package pdftex.def Info: Stopschild.png used on input line 187.
+Package pdftex.def Info: Stopschild.png used on input line 186.
 (pdftex.def)             Requested size: 199.16928pt x 205.82353pt.
 
 [11 <./Rad.png>] <Smily0.png, id=72, 280.54813pt x 280.04625pt>
 File: Smily0.png Graphic file (type png)
 
 <use Smily0.png>
-Package pdftex.def Info: Smily0.png used on input line 194.
+Package pdftex.def Info: Smily0.png used on input line 193.
 (pdftex.def)             Requested size: 142.26378pt x 142.00551pt.
 File: Smily3.png Graphic file (type png)
  <use Smily3.png>
-Package pdftex.def Info: Smily3.png used on input line 195.
+Package pdftex.def Info: Smily3.png used on input line 194.
 (pdftex.def)             Requested size: 142.26378pt x 142.26785pt.
  [12 <./Stopschild.png> <./Smily0.png>]
-Overfull \hbox (4.43771pt too wide) in paragraph at lines 206--245
+Overfull \hbox (4.43771pt too wide) in paragraph at lines 205--244
 \T1/cmr/m/n/10.95 http://www.pd-f.de/wp-content/uploads/kalins-pdf/singles/them
 enblatt-die-fahrradwelt-in- zah-
  []
 
 
-Overfull \hbox (3.87256pt too wide) in paragraph at lines 206--245
+Overfull \hbox (3.87256pt too wide) in paragraph at lines 205--244
 \T1/cmr/m/n/10.95 http://www.monkeylectric.com/monkey_light_pro/ [Zu-gang am 10
 .01.2017, um 16:56 Uhr; Mon-
  []
 
 
-Overfull \hbox (6.75537pt too wide) in paragraph at lines 206--245
+Overfull \hbox (6.75537pt too wide) in paragraph at lines 205--244
 \T1/cmr/m/n/10.95 https://www.raspberrypi.org/downloads/raspbian/ [Zu-gang am 1
 5.1.2017 um 11:54 Uhr; Raspber-
  []
 
 
-Overfull \hbox (4.48314pt too wide) in paragraph at lines 206--245
+Overfull \hbox (4.48314pt too wide) in paragraph at lines 205--244
 \T1/cmr/m/n/10.95 https://i1.wp.com/www.novaspirit.com/wp-content/uploads/2016/
 10/wireing.jpg?ssl=1 [Zu-gang
  []
 
 
-Overfull \hbox (0.32002pt too wide) in paragraph at lines 206--245
+Overfull \hbox (0.32002pt too wide) in paragraph at lines 205--244
 \T1/cmr/m/n/10.95 https://www.raspberrypi.org/documentation/configuration/wirel
 ess/wireless-cli.md [Zu-gang am
  []
 
 
-Overfull \hbox (11.63094pt too wide) in paragraph at lines 206--245
+Overfull \hbox (11.63094pt too wide) in paragraph at lines 205--244
 \T1/cmr/m/n/10.95 https://www.raspberrypi.org/documentation/configuration/raspi
 -config.md [Zu-gang am 15.1.2017,
  []
 
 
-Overfull \hbox (3.17165pt too wide) in paragraph at lines 206--245
+Overfull \hbox (3.17165pt too wide) in paragraph at lines 205--244
 \T1/cmr/m/n/10.95 -629536.html? gclid=CPfQ7JrP29ECFcG7GwodF3UFtQ&insert_kz=VQ&h
 k=SEM&WT.srch= 
  []
 
 
-Overfull \hbox (16.70816pt too wide) in paragraph at lines 206--245
+Overfull \hbox (16.70816pt too wide) in paragraph at lines 205--244
 \T1/cmr/m/n/10.95 1&WT.mc_id=g oo-gle_pla&s_kwcid=AL!222!3!173789970902!!!g!!&e
 f_id=WBpFUQAABUMWE 
  []
 
 
-Overfull \hbox (17.79248pt too wide) in paragraph at lines 206--245
+Overfull \hbox (17.79248pt too wide) in paragraph at lines 205--244
 \T1/cmr/m/n/10.95 google_&wt_cc2=913-0001_Hardware_257367&gclid=CMeX0KL759ECFYG
 w7Qod 2q8CRQ [Zu-
  []
 
 
-Overfull \hbox (5.02965pt too wide) in paragraph at lines 206--245
+Overfull \hbox (5.02965pt too wide) in paragraph at lines 205--244
 \T1/cmr/m/n/10.95 Waterproof-H3/111860633668? _trk-sid=p2141725.c100338.m3726&_
 trkparms=aid%3D222007% 
  []
 
 
-Overfull \hbox (10.5522pt too wide) in paragraph at lines 206--245
+Overfull \hbox (10.5522pt too wide) in paragraph at lines 205--244
 \T1/cmr/m/n/10.95 8990b9f5cc22f9914% 26pid%3D100338%26rk%3D1%26rkt%3D21%26sd%3D
 301963844528 [Zu-gang
  []
 
 
-Overfull \hbox (11.63696pt too wide) in paragraph at lines 206--245
+Overfull \hbox (11.63696pt too wide) in paragraph at lines 205--244
 \T1/cmr/m/n/10.95 1EC6Y/ref=sr_1_1?s=ce- de&ie=UTF8&qid=1483383358&sr=1-1&keywo
 rds=akkupack [Zu-gang
  []
@@ -1248,7 +1248,7 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  5974 strings out of 494787
  78205 string characters out of 6176020
- 250467 words of memory out of 5000000
+ 251467 words of memory out of 5000000
  9151 multiletter control sequences out of 15000+600000
  18241 words of font info for 44 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
@@ -1268,7 +1268,7 @@ er/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></us
 r/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf/fonts/
 type1/public/cm-super/sfrm0900.pfb></usr/share/texmf/fonts/type1/public/cm-supe
 r/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on Arbeit.pdf (14 pages, 5750849 bytes).
+Output written on Arbeit.pdf (14 pages, 5750761 bytes).
 PDF statistics:
  138 PDF objects out of 1000 (max. 8388607)
  86 compressed objects within 1 object stream
