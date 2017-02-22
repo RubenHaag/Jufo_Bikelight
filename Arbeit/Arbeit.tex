@@ -89,7 +89,7 @@ Der verwendete LED-Streifen hat die Modellnummer WS2812B und wird wie folgt ange
 Jede LED des LED-Streifens wird durch ein 24Bit Signal angesteuert, das mittels Pulsweitenmodulation (PWM) vom Raspberry Pi auf diesen übertragen wird. Bei der PWM wird 0V und 5V mit einer Pulsdauer $t_{Puls}$ bei einer Frequenz $f_{Puls}$ generiert. Der Quotient aus $t_{Puls}$ und $f_{Puls}$ ist der Tastgrad $\eta_{Puls}$. Demnach liegt nur noch eine durchschnittliche Spannung $U_{Puls}$ von $\eta_{Puls} \cdot 5V$ an. Die Farbanteile Grün, Rot und Blau werden je über acht bit angesteuert, so dass man pro Pixel 2\textsuperscript 8 also 256 und mit allen drei LEDs 16.777.216 verschiedene Farben anzeigen kann. Die Reihenfolge der Farbansteuerung ist in folgendem Diagramm verdeutlicht:
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=16cm]{AufbauDer24BitAnsteuerungDesStreifens.png}
+	\includegraphics[width=16cm]{rgbtabelle.png}
 	\caption{Reihenfolge der Bits bei der Ansteuerung einer LED des LED-Streifens}
 	\label{bits}
 \end{figure}
@@ -253,7 +253,15 @@ Wir vom Projekt \glqq Speichendisplay\grqq\ bedanken uns sehr bei der Fahrradwer
 			\hline
 			 Material & Kosten\\  
 			\hline
-			
+			Raspberry Pi 3\textsuperscript{13} & 36,99\euro \\
+			Platine\textsuperscript{16} & 0,95\euro \\
+			Platinenbox\textsuperscript{12} & 1,29\euro \\
+			Kabel\textsuperscript{14} & 2,58\euro \\
+			Halterung & 15,00\euro \\
+			LED-Streifen\textsuperscript{15} & 17,14\euro \\
+			Akkupack\textsuperscript{17}	& 10,99\euro \\
+			\hline
+			Summe & 84,94\euro\\
 			\hline
 		\end{tabular}
 	\label{Material}
