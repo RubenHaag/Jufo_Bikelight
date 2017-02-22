@@ -5,7 +5,7 @@
 \contentsline {subsection}{\numberline {3.1}Grundidee}{3}
 \contentsline {subsection}{\numberline {3.2}Physikalische Beschreibung}{3}
 \contentsline {subsection}{\numberline {3.3}Welche Mindestgeschwindigkeit wird gebraucht?}{5}
-\contentsline {subsection}{\numberline {3.4}Ansteuerung des Led Streifens}{5}
+\contentsline {subsection}{\numberline {3.4}Ansteuerung des LED Streifens}{5}
 \contentsline {subsection}{\numberline {3.5}Programm}{6}
 \contentsline {subsection}{\numberline {3.6}Aufbau und Montage}{10}
 \contentsline {subsubsection}{\numberline {3.6.1}Installation des Raspberry Pi{'}s}{10}
@@ -17,4 +17,4 @@
 \contentsline {section}{\numberline {6}Anhang}{13}
 \contentsline {subsection}{\numberline {6.1}Quellen- und Literaturverzeichnis}{13}
 \contentsline {subsection}{\numberline {6.2}Danksagungen}{14}
-\contentsline {subsection}{\numberline {6.3}Kostenkalkulation und Materialliste}{14}
+\contentsline {subsection}{\numberline {6.3}Kostenkalkulation und Materialliste}{15}
