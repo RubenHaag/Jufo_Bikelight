@@ -6,7 +6,12 @@
 \usepackage{textgreek}
 \usepackage{amsmath}
 \usepackage[rgb]{xcolor}
+\usepackage{lipsum}
+\usepackage{float}
 \usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{fancyhdr}
+\usepackage{geometry}
 \usepackage[T1]{fontenc}
 \usepackage{subfigure}
 \usepackage{subscript}
@@ -15,13 +20,14 @@
 \date{}
 \begin{document}
 \maketitle
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=16.0cm]{Smily3.png}
 \end{figure}
 \newpage
 \tableofcontents
 \newpage
+\setlength{\parindent}{0pt}
 \section{Einleitung}
 In Deutschland gibt es nach Daten des Zweirad-Industrie-Verbands\textsuperscript{1} (ZIV) 72 Millionen Fahrräder und 98\% der Deutschen können nach eigenen Angaben Fahrrad fahren\textsuperscript{1}. Trotzdem würden nur 38\% der Deutschen mehrmals in der Woche ihr Rad nutzen\textsuperscript{1}. Dies liegt nach eigener Erfahrung vor allem daran, dass man sich im Stadtverkehr in einem Auto sicherer fühlt, als auf einem Fahrrad. Natürlich kann man sich geeignete Kleidungsstücke, die die eigene Sichtbarkeit erhöhen, kaufen, aber diese sind meistens lästig und sind wenig modisch. Um diese Kleidungsstücke zu vermeiden, haben wir nach einer technisch besseren und interaktiveren Lösungsmöglichkeit gesucht. Wir dachten uns, dass die optimale Lösung ein Leuchtmittel zwischen den Speichen wäre und fanden bei unserer Suche ähnliche Lösungsansätze. Bei dem Besuch der Website der Firma Monkeylectrics\textsuperscript{2}\ haben wir etwas ähnliches gefunden: ein Speichendisplay, das jedoch mit rund 2000\euro\textsuperscript{2}\ nur wenige Fahrradfahrer ansprechen würde. Da haben wir uns gefragt, wie ein solches Speichendisplay kostengünstiger und besser herzustellen ist. Die Grundidee war, dass wir mit einem einfachen Raspberry Pi einen farbigen LED-Streifen ansteuern. Danach haben wir uns einen 1m langen LED-Streifen gekauft, bei dem man jede Diode einzeln mit dem Raspberry Pi ansteuern kann. Der Streifen besitzt dabei eine Dichte von 144 LEDs je Meter und hat somit ausreichend viele LEDs, um ein Bild in ansprechender Auflösung darzustellen. Wir haben uns erhofft, eine interaktive Variante zur Warnweste zu finden, indem zum Beispiel beim Überqueren einer Kreuzung vom Speichendisplay ein Stoppschild angezeigt wird, wodurch ein von der Seite kommender Autofahrer frühzeitig gewarnt wird. Das Speichendisplay und die Software sollen als Selbstbausatz für Fahrradfahrer aller Altersklassen zur Verfügung gestellt werden.
 \section{Problemstellung}
@@ -56,159 +62,143 @@ $b_1 = sin(\alpha)$ in Polarkoordinaten. Da diese jedoch für den Radius von 1 L
 a &= \cos (\alpha) \cdot r \\
 b &= \sin (\alpha) \cdot r 
 \end{align}
-Der Mittelpunkt des Koordinatensystems des Kreises, auf dem sich eine einzelne LED bewegt, ist noch auf dem Punkt A(0\big|0), wie auf Abb. 2 zu sehen ist. \\
+Der Mittelpunkt des Koordinatensystems des Kreises, auf dem sich eine einzelne LED bewegt, ist noch auf dem Punkt A(0\big|0), wie auf Abb. \ref{dia} a) zu sehen ist. \\
 Das Problem ist nun, dass die Pixel eines Bildes nur positive Koordinaten haben. Dies lässt sich dadurch korrigieren, dass man zu den x-Koordinaten die Hälfte der Breite des Bildes und zu den y-Koordinaten die Hälfte der Höhe des Bildes addiert:
 \begin{align}
 x &= \cos (\alpha) \cdot r + \frac{Breite \ des \ Bildes}{2} \\
 y &= \sin (\alpha) \cdot r +  \frac{\text{Höhe\ des\ Bildes}}{2}
 \end{align}
-Wir addieren die Hälfte der Höhe des Bildes und die Hälfte der Breite des Bildes, da dies die Mindestgröße ist, damit sich der Graph im ersten Quadranten befindet. Dadurch verändert sich der Mittelpunkt, wie auf Abb. 2 zu sehen ist, auf den Punkt M(35\big|35).
-\begin{figure}[h]
+Wir addieren die Hälfte der Höhe des Bildes und die Hälfte der Breite des Bildes, da dies die Mindestgröße ist, damit sich der Graph im ersten Quadranten befindet. Dadurch verändert sich der Mittelpunkt, wie auf Abb. \ref{dia} b) zu sehen ist, auf den Punkt M(35\big|35).
+\begin{figure}[H]
 \centering
-\subfigure[Kreisbewegung mit Mittelpunkt bei A(0\big|0)]{\includegraphics[width=5.0cm]{dia1.png}} 
-\hspace{0.15\textwidth}
+\subfigure[Kreisbewegung mit Mittelpunkt bei A(0\big|0)]{\includegraphics[width=5.0cm]{dia1.png}}
+\hspace{0.15\textwidth} 
 \subfigure[Kreisbewegung mit Mittelpunkt bei A(35\big|35)]{\includegraphics[width=5.0cm]{dia2.png}}
 \caption{Verschiebung des Kreiszentrums}
+\label{dia}
 \end{figure}
-\\Diese physikalischen Aspekte haben wir in unserem Programm folgendermaßen umgesetzt:
+Diese physikalischen Aspekte haben wir in unserem Programm folgendermaßen umgesetzt:
 \subsection{Welche Mindestgeschwindigkeit wird gebraucht?}
-Das menschliche Auge nimmt Bilder in einer Frequenz f\textsubscript{Auge} von 10 bis 12Hz auf\textsuperscript{17}. Um die Geschwindigkeit bei rund 10Hz zu berechnen, verwenden wir die Gleichung $v = \frac{\Delta s}{\Delta t}$. Auf die Kreisbewegung angewandt entspr"ache dies $v = \frac{2\pi r}{T}$ in $\frac{m}{s}$. Da $\frac{1}{T}$ der Frequenz entspricht, der Umrechnungsfaktor von $\frac{m}{s}$ in $\frac{km}{h}$ 3,6 ist und $d = 2 \cdot r$ gilt, erhalten wir die Gleichung $v = \pi \cdot f\textsubscript{Auge} \cdot d \cdot 3,6$. Durch das Anbringen der vier Streifen am Rad, ben"otigen wir nur ein viertel der urspr"ungliche Geschwindigkeit. Demnach gilt: 
+Das menschliche Auge nimmt Bilder in einer Frequenz f\textsubscript{Auge} von 10 bis 12Hz auf\textsuperscript{17}. Um die Geschwindigkeit bei rund 10Hz zu berechnen, verwenden wir die Gleichung $v = \omega \cdot r$. Auf die Kreisbewegung angewandt entspräche dies $v = \frac{2\pi r}{T}$ in $\frac{m}{s}$. Da $\frac{1}{T}$ der Frequenz entspricht, der Umrechnungsfaktor von $\frac{m}{s}$ in $\frac{km}{h}$ 3,6 ist und $d = 2 \cdot r$ gilt, erhalten wir die Gleichung $v = \pi \cdot f\textsubscript{Auge} \cdot d \cdot 3,6$. Durch das Anbringen der vier Streifen am Rad, benötigen wir nur ein viertel der ursprüngliche Geschwindigkeit. Demnach gilt: 
 \begin{align}
 v = \frac{\pi \cdot f\textsubscript{Auge} \cdot d \cdot 3,6}{4}
 \end{align}
 Also beträgt die Mindestgeschwindigkeit rund $v \approx 17\frac{km}{h}$ bei einem 24\grqq\ Rad, um ein vollständiges Bild zu erkennen. Die Geschwindigkeit, bei der schon ein Bild zu erkennen ist, ist jedoch kleiner, weil das Gehirn ein Bild selbst vervollständigt. Dem Gehirn genügt es, einige Konturen wahrzunehmen, um ein Bild oder Objekt zu erkennen, da es den Rest aus Erfahrung und Fantasie ergänzt\textsuperscript{18}.
-\subsection{Ansteuerung des Led Streifens}
-Der verwendete LED-Streifen hat die Mod so werden diese an die zweite LED übertragen, die wiederum nur die ersten 24bit für sich selbst übernimmt und den Rest weiterschickt usw.. ellnummer ws2812b und wird wie folgt angesteuert\textsuperscript{19}:
-Jede Led des LED-Streifens wird durch ein 24bit Signal angesteuert, das mittels Pulsweitenmodulation vom Raspberry Pi auf diesen übertragen wird. Die Farbanteile Grün, Rot und Blau werden je über acht bit angesteuert, so dass man pro pixel 2\textsuperscript 8 also 256 und mit allen drei LEDs 16.777.216 verschiedene Farben anzeigen kann. Die Reihenfolge der Farbansteuerung ist in folgendem Diagramm verdeutlicht:
-\begin{figure}[h]
+\subsection{Ansteuerung des LED Streifens}
+Der verwendete LED-Streifen hat die Modellnummer WS2812B und wird wie folgt angesteuert\textsuperscript{19}:
+Jede LED des LED-Streifens wird durch ein 24Bit Signal angesteuert, das mittels Pulsweitenmodulation (PWM) vom Raspberry Pi auf diesen übertragen wird. Bei der PWM wird 0V und 5V mit einer Pulsdauer $t_{Puls}$ bei einer Frequenz $f_{Puls}$ generiert. Der Quotient aus $t_{Puls}$ und $f_{Puls}$ ist der Tastgrad $\eta_{Puls}$. Demnach liegt nur noch eine durchschnittliche Spannung $U_{Puls}$ von $\eta_{Puls} \cdot 5V$ an. Die Farbanteile Grün, Rot und Blau werden je über acht bit angesteuert, so dass man pro Pixel 2\textsuperscript 8 also 256 und mit allen drei LEDs 16.777.216 verschiedene Farben anzeigen kann. Die Reihenfolge der Farbansteuerung ist in folgendem Diagramm verdeutlicht:
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=16cm]{AufbauDer24BitAnsteuerungDesStreifens.png}
-	\caption{Reihenfolge der Bits bei der Ansteuerung einer LED des LED-streifens}
-\end{figure}\\
-Falls nach diesem 24Bit Signal, innerhalb der Taktung\textsuperscript{19} noch weitere Signale an den LED-Streifen übertragen werden, so werden diese über den DOUT(siehe Abbildung 4) anschluss an die zweite LED übertragen, die wiederum nur die ersten 24bit für sich selbst übernimmt und den Rest weiterschickt usw.. 
-\begin{figure}[h]
+	\caption{Reihenfolge der Bits bei der Ansteuerung einer LED des LED-Streifens}
+	\label{bits}
+\end{figure}
+Falls nach diesem 24Bit Signal, innerhalb der Taktung\textsuperscript{19} noch weitere Signale an den LED-Streifen übertragen werden, so werden diese über den DOUT(siehe Abbildung 4) Anschluss an die zweite LED übertragen, die wiederum nur die ersten 24Bit für sich selbst übernimmt und den Rest iterativ weiterschickt.
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=4cm]{Schaltplan_des_LED-Streifens.png}
-	\caption{Schaltplan des Led-streifens\textsuperscript{19}}
+	\caption{Schaltplan des LED-Streifens\textsuperscript{19}}
+	\label{Schaltplan}
 \end{figure}
-
 \subsection{Programm}
 Wir haben das Programm in Python 3 geschrieben. Zu Beginn haben wir uns hauptsächlich an dem Programm strandtest.py orientiert, welches in der Adafruit-Neopixel-Library\textsuperscript{3} enthalten ist. Dieses Programm beinhaltete die Abfolge verschiedener Farben, die der LED- Streifen anzeigt. Anhand dieses Programms konnten wir die Reihenfolge und Darstellung der Farbwerte erschließen, welche in diesem Fall GRB ist.
 \\
-\\
 \textbf{\large Programmabschnitt 1:}\\
-In unserem fertigen Programm importieren wir anfangs die Module time, math und RPi.GPIO und die Libraries neopixel und PIL, welche wir für das später gebrauchen werden. Daraufhin haben wir verschiedene Variablen definiert, welche das Bild mittels der Funktion \textcolor{blue}{$open$}{$()$} der PIL öffnen, es mit der Funktion {$im.$}\textcolor{blue}{$load$}{$()$} laden und uns die Breite und Höhe des Bildes mit {$im.$}\textcolor{blue}{$size$}{$()$} ausgeben. Wie man im Prog. 4 später sieht ist es egal, ob das Bild RGB-Werte oder CMYK-Werte besitzt. Um das kommende Program effizienter zu gestalten, haben wir hier schon {$breite$} und {$h\text{ö}he$} als die Hälfte der Breite des Bildes und die Hälfte der Höhe des Bildes definiert. Die im Program benötigten Größen, die Anzahl der LEDs, die Nummer des Pins, der den LED-Streifen ansteuert, die Nummer des Pins, der den Magnetschalter ansteuert, die Frequenz der LEDs, der DMA-Kanal, die Helligkeit und die Anzahl der Streifen, werden daraufhin alle definiert. Zusätzlich haben wir diverse Variablen definiert, welche wir für numerische Schleifen oder zum späteren Definieren benötigen.
-\begin{figure}[h]
+In unserem fertigen Programm importieren wir anfangs die Module time, math und RPi.GPIO und die Libraries neopixel und PIL, welche wir für das später gebrauchen werden. Daraufhin haben wir verschiedene Variablen definiert, welche das Bild mittels der Funktion \textcolor{blue}{$open$}{$()$} der PIL öffnen, es mit der Funktion {$im.$}\textcolor{blue}{$load$}{$()$} laden und uns die Breite und Höhe des Bildes mit {$im.$}\textcolor{blue}{$size$}{$()$} ausgeben. Wie man im Prog. 4 später sieht ist es egal, ob das Bild RGB-Werte oder RGB\textalpha -Werte besitzt. Um das kommende Programm effizienter zu gestalten, haben wir hier schon {$breite$} und {$h\text{ö}he$} als die Hälfte der Breite des Bildes und die Hälfte der Höhe des Bildes definiert. Die im Programm benötigten Größen, die Anzahl der LEDs, die Nummer des Pins, der den LED-Streifen ansteuert, die Nummer des Pins, der den Magnetschalter ansteuert, die Frequenz der LEDs, der DMA-Kanal, die Helligkeit und die Anzahl der Streifen, werden daraufhin alle definiert.
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=16cm]{P1.png}
 	\caption{Programmabschnitt 1}
+	\label{P1}
 \end{figure}
-\\\textbf{\large Programmabschnitt 2:}\\
-Danach erschaffen wir die Liste {$radien$}, in der wir \textcolor{violet}{$0$} fünfunddreißigmal mit einer numerischen Schleife, die wir mittels der Funktion \textcolor{blue}{$range$}{$()$} mit der Untergrenze \textcolor{violet}{$0$} und der Obergrenze, die der Quotient aus LED\_COUNT und ANZAHL\_STREIFEN ist, erschaffen, einfügen, da man nicht solch eine Liste in der zweiten numerischen Schleife erschaffen kann, inder man die Radien als einzelne Werte in die Liste einfügt. Der Datentyp des Quotienten ist ein Float. Da die Funktion \textcolor{blue}{$range$}{$()$} nur mit Integer arbeitet, ändern wir den Typen des Quotienten mittels der Funktion \textcolor{blue}{$int$}{$()$} zu einem Integer. Danach erstellen wir eine weitere numerische Schleife für {$i$} (siehe Prog. 1) und denselben Grenzen und erschaffen damit die Radien. Wir ersetzen die \textcolor{violet}{$0$} an {$i$}-ter Stelle durch die Summe aus {$i$}, \textcolor{violet}{$1$}, und der Variablen {$minR$}. Die Addition von \textcolor{violet}{$1$} ist notwendig, da die Aufzählung sonst bei \textcolor{violet}{$0$} begänne. Die Addition von {$minR$} ist nötig, da wir die ersten fünf Radien nicht verwenden können, weil sich dort aufgrund der Radnabe keine LEDs befinden. 
+\textbf{\large Programmabschnitt 2:}\\
+Danach erschaffen wir die Liste {$radien$}, in der wir \textcolor{violet}{$0$} fünfunddreißigmal mit einer numerischen Schleife, die wir mittels der Funktion \textcolor{blue}{$range$}{$()$} mit der Untergrenze \textcolor{violet}{$0$} und der Obergrenze, die der Quotient aus LED\_COUNT und ANZAHL\_STREIFEN ist, erschaffen, einfügen, da man nicht solch eine Liste in der zweiten numerischen Schleife erschaffen kann, in der man die Radien als einzelne Werte in die Liste einfügt. Der Datentyp des Quotienten ist ein Float. Da die Funktion \textcolor{blue}{$range$}{$()$} nur mit Integer arbeitet, ändern wir den Typen des Quotienten mittels der Funktion \textcolor{blue}{$int$}{$()$} zu einem Integer. Danach erstellen wir eine weitere numerische Schleife für {$i$} (siehe Prog. 1) und denselben Grenzen und erschaffen damit die Radien. Wir ersetzen die \textcolor{violet}{$0$} an {$i$}-ter Stelle durch die Summe aus {$i$}, \textcolor{violet}{$1$}, und der Variablen {$minR$}. Die Addition von \textcolor{violet}{$1$} ist notwendig, da die Aufzählung sonst bei \textcolor{violet}{$0$} begänne. Die Addition von {$minR$} ist nötig, da wir die ersten fünf Radien nicht verwenden können, weil sich dort aufgrund der Radnabe keine LEDs befinden. 
 Da wir {$i$} im Bereich von 0 bis 35 aufzählen, decken wir alle 35 Radien ab, die zuerst \textcolor{violet}{$0$} waren und dann ersetzt werden. Wir haben 35 Radien, da ein Teilstreifen 35 LEDs besitzt.
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=16cm]{P2.png}
 	\caption{Programmabschnitt 2}
+	\label{P2}
 \end{figure}
-\\
 \textbf{\large Programmabschnitt 3:}\\
-Die zwei Funktionen \textcolor{green}{$line$}{$()$} und \textcolor{green}{$startPrint$}{$()$} beziehen sich auf die Herstellung der Startanzeige.
-Die Funktion \textcolor{green}{$line$} erstellt die Abgrenzungen der Startanzeige. Anfangs wird ein leerer String {$s$} erzeugt. Dieser String erhält dann mit einer numerischen Schleife für {$i$} (siehe Prog. 1) in dem Bereich von \textcolor{violet}{$0$} bis \textcolor{orange}{$l\text{ä}nge$}, welcher in der Funktion startPrint{$()$} gewählt wird, Striche (je nachdem wie \textcolor{orange}{$l\text{ä}nge$} gewählt wird) und wird am Ende der Funktion ausgegeben. Die Funktion \textcolor{green}{$startPrint$}{$()$} gibt die Startanweisung aus. In der Startanweisung werden die wichtigsten Größen für den Benutzter ausgegeben. Als Parameter für die Funktion \textcolor{green}{$line$}{$()$} haben wir \textcolor{violet}{$50$} gewählt, da dies eine geeignete Länge für eine Abgrenzung ist. Am Ende wird die Ausgabe erzeugt, dass man das Programm mittels der Tastenkombination Strg-c beenden kann.
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=16cm]{P3.png}
-	\caption{Programmabschnitt 3}
-\end{figure}
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=7cm]{Startanzeige.png}
-	\caption{Startanzeige}
-\end{figure}
-\newpage
-
-\textbf{\large Programmabschnitt 4:}\\
 Die Funktion \textcolor{green}{$bildAuslesen$}{$()$} gibt zu jeder Position der LEDs die x- und y-Koordinaten und die dazugehörigen RGB-Werte im Bild aus. Die x- und die y-Koordinate werden mit den Gleichungen 7 und 8 (siehe Physikalische Beschreibung) berechnet. Da die Funktionen \textcolor{blue}{$sin$}{$()$} und \textcolor{blue}{$cos$}{$()$} auf fünfzehn Stellen genau die Koordinaten ausgegeben, wir sie allerdings nur mit einer Dezimalstelle genau benötigen, werden die Gleichungen 7 und 8 folgendermaßen geändert:
 \begin{align}
 x \approx \cos (\alpha) \cdot r + \frac{\text{Breite \ des \ Bildes}}{2} \\
 y \approx\sin (\alpha) \cdot r + \frac{\text{Höhe\ des\ Bildes}}{2}
 \end{align}
-Im Programm runden wir sie mit der Funktion \textcolor{blue}{$round$}{$()$} auf die erste Dezimalstelle. Danach werden die RGB Werte an den Koordinaten x und y mit der Funktion pix[x, y] (siehe Prog. 1) ausgelesen. Mit Hilfe einer try-except-Anweisung kann unser Programm zwischen Bildern mit RGB-Werten oder CMYK-Werten unterscheiden und mit der Anweisung \textcolor{red}{$return$} \textcolor{blue}{$Color$}(g, r, b) beziehngsweise \textcolor{red}{$return$} \textcolor{blue}{$Color$}(g, r, b, \_) an den LED- Streifen übergeben. Bei der Variante mit den CMYK-Werten lassen wir die Schwarzwerte raus, da wir sie nicht benötigen. Dies geschieht in der Reihenfolge g, r, b (siehe Prog. 1).
-\begin{figure}[h]
+Im Programm runden wir sie mit der Funktion \textcolor{blue}{$round$}{$()$} auf die erste Dezimalstelle. Danach werden die RGB-Werte an den Koordinaten x und y mit der Funktion pix[x, y] (siehe Prog. 1) ausgelesen. Mit Hilfe einer try-except-Anweisung kann unser Programm zwischen Bildern mit RGB-Werten oder RGB\textalpha -Werten unterscheiden und mit der Anweisung \textcolor{red}{$return$} \textcolor{blue}{$Color$}(g, r, b) beziehungsweise \textcolor{red}{$return$} \textcolor{blue}{$Color$}(g, r, b, \_) an den LED- Streifen übergeben. Bei der Variante mit den RGB\textalpha -Werten vernachlässigen wir den Transparenzwert, da wir ihn nicht benötigen. Dies geschieht in der Reihenfolge g, r, b (siehe Prog. 1).
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=16cm]{P4.png}
-	\caption{Programmabschnitt 4}
+	\caption{Programmabschnitt 3}
 \end{figure}
-\\\textbf{\large Programmabschnitt 5:}\\
-In der Funktion \textcolor{green}{$streifenBedienen$}{$()$} werden zuerst die Liste mit den Radien {$radien$}, der LED-Streifen {$streifen$} (siehe Prog. 6) und die im ersten Programmabschnitt voreingestellte Umlaufzeit {$T$}, Zeitabschnitt {$t$} und Winkelgeschwindigkeit \textomega\ globalisiert, da wir diese über mehrere Funktionen benötigen und die Globalisierung effizienter ist, als sie als Parameter zu übergeben. Die Winkel $alpha,\ beta,\ gamma$ und $delta$ werden nach Gleichung 4 berechnet. Die Winkelgeschwindigkeit und der Zeitabschnitt werden jedoch in \textcolor{green}{$main$}{$()$} berechnet. Da die LED-Streifen in einem Winkel von 90$^\circ$ gedreht sind, addieren wir zum vorhin berechneten Winkel 90$^\circ$ beziehungsweise
+\textbf{\large Programmabschnitt 4:}\\
+In der Funktion \textcolor{green}{$streifenBedienen$}{$()$} werden zuerst die Liste mit den Radien {$radien$}, der LED-Streifen {$streifen$} (siehe Prog. 5) und die im ersten Programmabschnitt voreingestellte Umlaufzeit {$T$}, Zeitabschnitt {$t$} und Winkelgeschwindigkeit \textomega\ globalisiert, da wir diese über mehrere Funktionen benötigen und die Globalisierung effizienter ist, als sie als Parameter zu übergeben. Die Variablen für die Winkel $alpha,\ beta,\ gamma$ und $delta$ werden nach Gleichung 4 berechnet. Die Winkelgeschwindigkeit und der Zeitabschnitt werden jedoch in \textcolor{green}{$main$}{$()$} berechnet. Da die LED-Streifen in einem Winkel von 90$^\circ$ gedreht sind, addieren wir zum vorhin berechneten Winkel 90$^\circ$ beziehungsweise
 $\frac{\pi}{2}$
 hinzu. Weil der Zeitabschnitt {$t$} größer wird, wachsen die Winkel an, was die Bewegung der LEDs im Bild simuliert. Dann haben wir {$n$} als Anzahl der Pixel des LED-Streifens, {$u$} als Anzahl der Pixel auf einen Teilstreifen und {$M$} als die Hälfte der Anzahl der Pixel des LED-Streifens definiert. Die erste numerische Schleife zählt bis {$u$} hoch, dabei wird {$i$} um 1 erweitert und {$u$}  um 1 verringert. Die Funktion \textcolor{green}{$bildAuslesen$}{$()$} ermittelt dann für den ersten und dritten Streifen (siehe Anhang Abb. 3) die RGB-Werte. Wir lassen die Radien rückwärts von der Liste {$radien$} aufzählen, indem wir {$u = u - 1$} rechnen. Demnach nimmt bei größer werdendem {$i$} {$u$} von 35 bis 0 ab und in dieser Reihenfolge werden die Radien aus der Liste {$radien$} aufgerufen. Die Radien müssen rückwärts aufgerufen werden, da die PIL das Bild vom Zentrum aus ausliest, der erste und dritte LED-Streifen jedoch von außen angeschlossen sind (siehe Anhang Abb. 3). Da {$u$} in der ersten numerischen Schleife heruntergezählt wurde, mussten wir {$u$} nochmals definieren. Die RGB-Werte werden mit der Nummer der jeweiligen LED der Funktion {$streifen.$}\textcolor{blue}{$setPixelColor$}{$()$} übergeben. Wir erhalten für den ersten Streifen die richtige Reihenfolge, da {$i$} von 0 bis 35 aufgezählt wird und für den dritten Streifen ebenfalls, weil wir {$i$} mit {$M$} addieren, weil der dritte Streifen einen halben Streifen vom ersten entfernt ist. Die zweite numerische Schleife zählt von {$u$} bis {$M$}. Die Funktion \textcolor{green}{$bildAuslesen$}{$()$} gibt die RGB-Werte des zweiten und vierten LED-Streifens an. Die Radien werden diesmal in der richtigen Reihenfolge aus der Liste entnommen, da diese LED-Streifen von innen angeschlossen sind (siehe Anhang Abb. 3). Anschließend werden die RGB-Werte zusammen mit der Nummer der anzustauenden LED an die Funktion {$streifen.$}\textcolor{blue}{$setPixelColor$}{$()$} übergeben. Die Nummerierung der LEDs am zweiten Streifen verläuft von 35 bis 70, da {$i$} in der numerischen Schleife hochgezählt wird. Die Nummerierung der LEDs am vierten Streifen geht von 105 bis 140, weil der Streifen 70 LEDs vom zweiten Streifen entfernt war. Diese Aufzählung erreicht man, indem man {$i$} mit {$M$} addiert. Am Ende von \textcolor{green}{$streifenBedienen$}{$()$} bringt die Funktion {$streifen.$}\textcolor{blue}{$show$}{$()$} die LED-Streifen zum Leuchten.
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=16cm]{P5.png}
-	\caption{Programmabschnitt 5}
+	\caption{Programmabschnitt 4}
 \end{figure} 
-\\\textbf{\large Programmabschnitt 6:}\\
+\textbf{\large Programmabschnitt 5:}\\
 In der Funktion \textcolor{green}{$main$}{$()$} werden zuerst die benötigten Variablen globalisiert. Dies sind die Umlaufzeit {$T$}, der Zeitabschnitt {$t$}, die Zeit seit dem Beginn der Umdrehung {$t1$}, die Liste {$radien$} mit den Radien, der LED-Streifen {$streifen$} und die Winkelgeschwindigkeit \textomega. Danach wird mit der Anweisung {$gp.$}\textcolor{blue}{$setmode$}{$(gp.BCM)$} festgelegt, dass GPIO-Nummern verwendet werden. Mit der Anweisung {$gp.$}\textcolor{blue}{$setwarnings$}{$($}\textcolor{violet}{False}{$)$} wird festgelegt, dass keine Warnungen ausgegeben werden, da wir diese nicht benötigen und mit der Anweisung {$gp.$}\textcolor{blue}{$setmode$}{$(MAGNET\_PIN, gp.IN)$} wird {$MAGNET\_PIN$} (siehe ersten Programmabschnitt) als Eingang festgelegt. Mit der Methode {$Adafruit\_NeoPixel$} wird mit den Eigenschaften {$LED\_COUNT, LED\_PIN, LED\_FREQ\\ \_HZ, LED\_DMA, LED\_INVERT, LED\_BRIGHTNESS$} das Objekt {$streifen$}, also der LED-Streifen erstellt. Die Funktion {$streifen.$}\textcolor{blue}{$begin$}{$()$} initialisiert den LED-Streifen und die Funktion \textcolor{blue}{$startPrint$}{$()$} gibt die Startanzeige aus. In der darauf folgenden while-Schleife wird festgelegt, dass die Zeit seit dem Beginn der Umdrehung gleich der Systemzeit ist. Danach wird die Bedingung formuliert, dass, falls der Magnetschalter {$MAGNET\_PIN$} nicht auslöst, die Winkelgeschwindigkeit \textomega\ mit der Gleichung 2 berechnet wird. In dieser if-Anweisung befindet sich eine while-Schleife, welche erfüllt ist, wenn der Magnetschalter nicht auslöst. In dieser while-Schleife wird ein Zeitabschnitt berechnet und da diese while-Schleife mehrere male auslöst, werden mehrere Zeitabschnitte berechnet, die man für die Winkelberechnung benötigt (siehe Prog. 5). Ebenfalls wird die Funktion streifenBedienen{$()$} aufgerufen, welche den LED-Streifen dann zum Leuchten bringt. Wenn der Magnetschalter auslöst, also die if-Anweisung nicht zutrifft, wird die Umlaufzeit nach der Gleichung 1 berechnet. Da wir anfangs (siehe Prog. 1) {$T$} und {$t$} definiert haben, erhalten wir keinen \textcolor{red}{$UnboundLocalError$}.
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=16cm]{P6.png}
-	\caption{Programmabschnitt 6}
+	\caption{Programmabschnitt 5}
 \end{figure} 
-\\\textbf{\large Programmabschnitt 7:}\\
+\textbf{\large Programmabschnitt 6:}\\
 Die Funktion \textcolor{blue}{$main$}{$()$} wird aufgerufen, indem eine if-Anweisung auslöst, wenn der Name des Programms {$main$} ist, was hier der Fall ist.
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=16cm]{P7.png}
-	\caption{Programmabschnitt 7}
+	\caption{Programmabschnitt 6}
 \end{figure}
 \subsection{Aufbau und Montage}
 \subsubsection{Installation des Raspberry Pi{'}s}
-Als erstes haben wir eine microSD-Karte mit dem Betriebssystem Raspbian\textsuperscript{6}\ bespielt und haben einen WLAN-USB-Stick von seinem Gehäuse entnommen und nach einem Bild\textsuperscript{7} mit dem Raspberry Pi Zero verbunden. Danach haben wir die SD-Karte in einen Computer gesteckt und haben in die Datei {$/etc/wpa\_supplicant/wpa\_supplicant.conf$} Netzwerkdetails hinzugefügt\textsuperscript{8}.
-Danach haben wir den Raspberry Pi an einen Monitor angeschlossen, ihn zum ersten mal gebootet und mit Hilfe des Befehls {$raspi-config$}\textsuperscript{9}\ den Zugriff auf den Raspberry Pi durch SSH ermöglicht. Seinen Hostnamen haben wir zu Spokescreen geändert. Danach konnten wir über jeden PC in unserem Heimnetzwerk, auf welchem ein SSH-Client installiert war, auf das Terminal des Raspberry Pis zugreifen.
-Nun haben wir git, den Github Client für Linux, auf dem Raspberry Pi installiert und unser Github Repository\textsuperscript{10}\ auf den Pi mit dem Befehl {$git\ clone\ https://github.com/ RubenHaag/Jufo\_Spokescreen$} heruntergeladen. Danach haben wir die Python Image Library\textsuperscript{5}, zum Auslesen eines Bildes mit Python, und die Adafruit Neopixel Library\textsuperscript{3}, zum Ansteuern der LED-Streifen installiert. Um nun unsere LED-Streifen zu testen, haben wir uns zuerst einen Schaltplan mit Hilfe des Tools Fritzing\textsuperscript{11} gezeichnet.\\
-\begin{figure}[h]
+Als erstes haben wir eine microSD-Karte mit dem Betriebssystem Raspbian\textsuperscript{6}\ bespielt und haben einen WLAN-USB-Stick von seinem Gehäuse entnommen und mit Hilfe der Quelle 7 an den Raspberry Pi Zero gelötet. Danach haben wir die SD-Karte in einen Computer gesteckt und haben in die Datei {$/etc/wpa\_supplicant/wpa\_supplicant.conf$} Netzwerkdetails hinzugefügt\textsuperscript{8}.
+Danach haben wir den Raspberry Pi an einen Monitor angeschlossen, ihn zum ersten mal gebootet und mit Hilfe des Befehls {$raspi-config$}\textsuperscript{9}\ den Zugriff auf den Raspberry Pi durch SSH ermöglicht. Seinen Hostnamen haben wir zu Bikelight geändert. Danach konnten wir über jeden PC in unserem Heimnetzwerk, auf welchem ein SSH-Client installiert war, auf das Terminal des Raspberry Pis zugreifen.
+Nun haben wir git, den Github Client für Linux, auf dem Raspberry Pi installiert und unser Github Repository\textsuperscript{10}\ auf den Pi mit dem Befehl {$git\ clone\ https://github.com/ RubenHaag/Jufo\_Bikelight$} heruntergeladen. Danach haben wir die Python Image Library\textsuperscript{5}, zum Auslesen eines Bildes mit Python, und die Adafruit Neopixel Library\textsuperscript{3}, zum Ansteuern der LED-Streifen installiert. Um nun unsere LED-Streifen zu testen, haben wir uns zuerst einen Schaltplan (Abb. \ref{Schaltplan}) mit Hilfe des Tools Fritzing\textsuperscript{11} gezeichnet.\\
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=10cm]{u.png}
 	\caption{Schaltplan}
+	\label{Schaltplan}
 \end{figure}
-\\
-Der Raspberry Pi ist mit einem seiner Ground-Pins mit der Masse verbunden und mit einem der beiden 5-Volt-Pins direkt mit der Spannungsquelle verbunden. Der LED Streifen ist ebenfalls mit dem 5-Volt- und Ground-Pin verbunden und wird über den GPIO-18-Pin des Raspberry Pis angesteuert, da dieser als einer der wenigen die für die Ansteuerung des Streifens essentielle Pulsweitenmodulation (PWM) unterstützt. Um die Zeit nun einmal pro Umdrehung zu messen, verwenden wir das Reed-Relais (Magnetschalter) eines Fahrradtachos. Durch diese Relais fließt, wenn er in die Nähe des an der Gabel befestigten Magneten kommt, Strom, da sich die Kontakte im Relais schließen, welcher über den GPIO-17-Pin des Raspberry Pis ausgelesen wird. Zur Absicherung des Raspberry Pis gegen eventuelle Spannungsschwankungen ist der Magnetschalter zusätzlich noch über einen Widerstand von 7M\textOmega\ mit dem Ground-Pin verbunden. Die Stromversorgung liefern zwei USB-Powerbanks mit je 5000 mAh. Sie liefern eine konstante Spannung von je 5 V, besitzen eine relativ hohe Energiedichte und sind trotzdem vergleichsweise leicht. Diese sind parallel geschaltet, damit die Spannung den Raspberry Pi nicht überlastet, und stellen die Stromversorgung mit 5 V dar. Die Powerbanks haben wir angeschlossen, indem wir zwei USB Kabel abisoliert und mit Standard-Pin-Anschlüssen versehen haben (Polung siehe Lit. [4]). Diesen Schaltplan haben wir zuerst auf einem Breadboard zusammengebaut, um zu testen, ob die LED-Streifen und der Magnetschalter funktionieren. Als einen ersten Test für den LED- Streifen haben wir das bei der Adafruit NeoPixel Library\textsuperscript{3} mitgelieferte Programm \glqq Strandtest.py\grqq\ verwendet.
+Der Raspberry Pi ist mit einem seiner Ground-Pins mit der Masse verbunden und mit einem der beiden 5-Volt-Pins direkt mit der Spannungsquelle verbunden. Der LED Streifen ist ebenfalls mit dem 5-Volt- und Ground-Pin verbunden und wird über den GPIO-18-Pin des Raspberry Pis angesteuert, da dieser als einer der wenigen die für die Ansteuerung des Streifens essentielle Pulsweitenmodulation (PWM) unterstützt. Um die Zeit nun einmal pro Umdrehung zu messen, verwenden wir das Reed-Relais (Magnetschalter) eines Fahrradtachos. Durch diese Relais fließt, wenn er in die Nähe des an der Gabel befestigten Magneten kommt, Strom, da sich die Kontakte im Relais schließen, welcher über den GPIO-17-Pin des Raspberry Pis ausgelesen wird. Zur Absicherung des Raspberry Pis gegen eventuelle Spannungsschwankungen ist der Magnetschalter zusätzlich noch über einen Widerstand von 7M\textOmega\ mit dem Ground-Pin verbunden. Die Stromversorgung liefern zwei USB-Powerbanks mit je 5000 mAh. Sie liefern eine konstante Spannung von je 5 V, besitzen eine relativ hohe Energiedichte und sind trotzdem vergleichsweise leicht. Diese sind parallel geschaltet, damit die Spannung den Raspberry Pi nicht überlastet, und stellen die Stromversorgung mit 5 V dar. Die Powerbanks haben wir angeschlossen, indem wir zwei USB Kabel abisoliert und mit Standard-Pin-Anschlüssen versehen haben\textsuperscript{4}. Diesen Schaltplan haben wir zuerst auf einem Breadboard zusammengebaut, um zu testen, ob die LED-Streifen und der Magnetschalter funktionieren. Als einen ersten Test für den LED- Streifen haben wir das bei der Adafruit NeoPixel Library\textsuperscript{3} mitgelieferte Programm \glqq Strandtest.py\grqq\ verwendet.
 \subsubsection{Aufbau und Funktion des ersten Tests mit dem LED-Streifen}
 Für den Magnetschalter haben wir ein Programm geschrieben, um die Zeit zwischen zwei Signalen von diesem zu messen (siehe Programm).
 Da alle Komponenten ohne Probleme funktionierten, haben wir nun den LED-Streifen in vier Teile á 36 LEDs geteilt und für einen größeren Spielraum haben wir von jedem Streifen eine LED entfernt. Zuerst haben wir versucht, die vier unterschiedlichen LED-Streifen an vier unterschiedlichen GPIO-Pins anzuschließen, bis wir festgestellten, dass der verwendete Raspberry Pi 3 und der Raspberry Pi Zero, den wir später anschließen wollten, nur 6 GPIO-Pins haben, die PWM unterstützen. Um auf jeder Seite vier LED-Streifen anzubringen, hätten wir jedoch mindestens 8 Pins benötigt, also haben wir die vier LED-Streifen in Reihe geschaltet und so nur den PWM fähigen GPIO-18-Pin verwendet.
 Daraufhin haben wir den Schaltplan auf eine Platine übertragen und die vier LED-Streifen durch unterschiedlich lange Kabelstücke miteinander verbunden, um sie später entsprechend auf dem Reifen zu platzieren. Die Platine haben wir nun in eine wasserdichte Verteilerbox eingebaut und mit Kabelbindern an den Speichen befestigt.
-Nach ersten misslungenen Versuchen mit Kunststoffhalterungen haben wir uns aus Stabilitätsgründen für eine Märklin-Metall-Halterung entschieden, um die Elektronik sicher an dem Speichenrad zu befestigen. Die Halterung haben wir um die Nabe herum in einem rechtwinkligen Kreuz angeordnet. Dann haben wir die LED-Streifen auf feste Kunststoffstreifen geklebt und diese dann mit Kabelbindern an dem Metallkreuz befestigt. Dieses wurde wiederum an einer Fahrradgabel montiert und fixiert. Dann haben wir die Felge über einen Märklin Metall-Motor angetrieben, um eine gleichbleibende, einstellbare Geschwindigkeit zu erhalten, die der Geschwindigkeit eines durchschnittlichen Fahrradfahrers entspricht. Der finale Aufbau ist in Abb. 14 dargestellt:
-\begin{figure}[h]
+Nach ersten misslungenen Versuchen mit Kunststoffhalterungen haben wir uns aus Stabilitätsgründen für eine Märklin-Metall-Halterung entschieden, um die Elektronik sicher an dem Speichenrad zu befestigen. Die Halterung haben wir um die Nabe herum in einem rechtwinkligen Kreuz angeordnet. Dann haben wir die LED-Streifen auf feste Kunststoffstreifen geklebt und diese dann mit Kabelbindern an dem Metallkreuz befestigt. Dieses wurde wiederum an einer Fahrradgabel montiert und fixiert. Dann haben wir die Felge über einen Märklin Metall-Motor angetrieben, um eine gleichbleibende, einstellbare Geschwindigkeit zu erhalten, die der Geschwindigkeit eines durchschnittlichen Fahrradfahrers entspricht. Der finale Aufbau ist in Abb. \ref{Skizze} dargestellt:
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=9.5cm]{Rad.png}
 	\caption{Skizze des Aufbaus}
+	\label{Skizze}
 \end{figure}
-\subsection{Welche Mindestgeschwindigkeit wird gebraucht?}
-Das menschliche Auge nimmt Bilder in einer Frequenz f\textsubscript{Auge} von 10 bis 12Hz auf\textsuperscript{17}. Um die Geschwindigkeit bei rund 10Hz zu berechnen, verwenden wir die Gleichung $v = \frac{\Delta s}{\Delta t}$. Auf die Kreisbewegung angewandt entspr"ache dies $v = \frac{2\pi r}{T}$ in $\frac{m}{s}$. Da $\frac{1}{T}$ der Frequenz entspricht, der Umrechnungsfaktor von $\frac{m}{s}$ in $\frac{km}{h}$ 3,6 ist und $d = 2 \cdot r$ gilt, erhalten wir die Gleichung $v = \pi \cdot f\textsubscript{Auge} \cdot d \cdot 3,6$. Durch das Anbringen der vier Streifen am Rad, ben"otigen wir nur ein viertel der urspr"ungliche Geschwindigkeit. Demnach gilt: 
-\begin{align}
-v = \frac{\pi \cdot f\textsubscript{Auge} \cdot d \cdot 3,6}{4}
-\end{align}
-Also beträgt die Mindestgeschwindigkeit rund $v \approx 17\frac{km}{h}$ bei einem 24\grqq\ Rad, um ein vollständiges Bild zu erkennen. Die Geschwindigkeit, bei der schon ein Bild zu erkennen ist, ist jedoch kleiner, weil das Gehirn ein Bild selbst vervollständigt. Dem Gehirn genügt es, einige Konturen wahrzunehmen, um ein Bild oder Objekt zu erkennen, da es den Rest aus Erfahrung und Fantasie ergänzt\textsuperscript{18}.
+An Stelle der Märklin-Metall-Halterung haben wir eine Platine aus Epoxydharz entworfen und der Ätzvorgang ist in Arbeit. Diese Platien werden wir von außen mit Hilfe von Katzenaugen befestigen.  
 \section{Ergebnis}
 Uns ist es gelungen, eine interaktivere, stilvollere und zum gleichen Maße sichere Lösung, im Vergleich zu einer Warnweste zu bauen. Es ist damhingehend stilvoller, da man mit diesem Speichendisplay jedes Bild seiner Wahl anzeigen lassen kann, welches zusätzlich die Sicherheit eines Fahrradfahrers erhöht.
-Unser Speichendisplay ist dazu noch günstiger als vergleichbare Modelle. Wie man anhand der Auflistung der Kosten für Materialien sieht, beschränken sich die Materialkosten auf nur zirka 100 \euro\ (siehe 6.3). Aufgrund der Trägheit des Auges des Betrachters und der konstant hohen Geschwindigkeit des Rades, entsteht für den Betrachter der Eindruck eines ruhenden Bildes. Somit gelingt es uns, ein scheinbar ruhendes Bild auf dem Speichendisplay zu produzieren. Es ist uns damit auch gelungen, ein Stoppschild und andere Verkehrszeichen auf dem Speichendisplay anzuzeigen.
+Unser Speichendisplay ist dazu noch günstiger als vergleichbare Modelle. Wie man anhand der Auflistung der Kosten für Materialien sieht, beschränken sich die Materialkosten auf nur zirka 100 \euro\ (siehe Tabelle \ref{Material}). Aufgrund der Trägheit des Auges des Betrachters und der konstant hohen Geschwindigkeit des Rades, entsteht für den Betrachter der Eindruck eines ruhenden Bildes. Somit gelingt es uns, ein scheinbar ruhendes Bild auf dem Speichendisplay zu produzieren. Es ist uns damit auch gelungen, ein Stoppschild und andere Verkehrszeichen auf dem Speichendisplay anzuzeigen.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=7cm]{Stopschild.png}
 	\caption{Skizze des Aufbaus}
 \end{figure}
 \subsection{Ergebnisdiskussion}
-Nach einem ersten Start unseres Programmes haben wir festgestellt, dass der Raspberry Pi Zero, den wir wegen seiner geringen Größe und seinem kaum spürbaren Gewicht verwenden wollten, viel zu langsam ist, um ein hochauflösendes Bild darzustellen (siehe Abb. 7a). Der deutlich schnellere Raspberry Pi 3 erstellt hierbei einen viel besseres Bild (siehe Abb. 7b). Dies sieht man auch auf den beiden Bildern:
+Nach einem ersten Start unseres Programmes haben wir festgestellt, dass der Raspberry Pi Zero, den wir wegen seiner geringen Größe und seinem kaum spürbaren Gewicht verwenden wollten, viel zu langsam ist, um ein hochauflösendes Bild darzustellen (siehe Abb. \ref{Vergleich} a)). Der deutlich schnellere Raspberry Pi 3 erstellt hierbei einen viel besseres Bild (siehe Abb. \ref{Vergleich} b)). Dies sieht man auch auf den beiden Bildern:
 \begin{figure}[h]
 \centering
 \subfigure[Smily mit Raspberry Pi Zero]{\includegraphics[width=5.0cm]{Smily0.png}} 
 \subfigure[Smily mit Raspberry Pi 3]{\includegraphics[width=5.0cm]{Smily3.png}}
 \caption{Vergleich zwischen dem Raspberry Pi Zero und dem Raspberry Pi 3}
+\label{Vergleich}
 \end{figure}
 \\Aus diesem Grund haben wir uns für den schnelleren Raspberry Pi 3 entschieden, den wir auch in Zukunft weiter verwenden werden. Der passt jedoch leider in keine für uns momentan verfügbare wasserdichte Verteilerbox. Daher ist das Speichendisplay momentan an einem Fahrrad noch nicht bei jedem Wetter einsetzbar.
 \subsection{Geplante Verbesserungen}
-Wir haben vor, unsere gesamte Apparatur wasserfest zu machen, damit man bei fast allen Wetterbedingungen mit dem Speichendisplay fahren kann. Im Laufe der weiteren Projektweiterentwicklung wollen wir die LED-Ansteuerung-Software durch selbstentwickelte Software ersetzen, um dieses Projekt ganz unser Eigen nennen zu können. Zum Steuern des Raspberry Pi planen wir den Raspberry Pi eine Website hosten zu lassen, auf die ein Nutzer über eine W-LAN Verbindung zum Raspberry Pi zugreifen und Bilder von seinem Endgerät auf den Raspberry Pi hochladen kann. Zusätzlich möchten wir insgesamt drei Magnetsensoren an das Rad montieren, um damit die Drehrichtung des Rades zu ermitteln. So können wir das Bild unabhängig von der Drehrichtung darstellen.
+Wir haben vor, unsere gesamte Apparatur wasserfest zu machen, damit man bei fast allen Wetterbedingungen mit dem Speichendisplay fahren kann. Zum Steuern des Raspberry Pi planen wir den Raspberry Pi eine Website hosten zu lassen, auf die ein Nutzer über eine W-LAN Verbindung zum Raspberry Pi zugreifen und Bilder von seinem Endgerät auf den Raspberry Pi hochladen kann. Zusätzlich möchten wir insgesamt drei Magnetsensoren an das Rad montieren, um damit die Drehrichtung des Rades zu ermitteln. Somit ist Motagerichtung des Bikelights egal. 
 \section{Zusammenfassung}
 Alles in allem ist das Speichendisplay eine interaktive, multifunktionale, kostengünstige und sicherheitsfördernde Anzeige, die jedoch noch kleine Kinderkrankheiten hat. Mit diesem Speichendisplay erhoffen wir uns, mehr Menschen zum sicheren Fahrradfahren, auch im Dunkeln, zu begeistern.
 \section{Anhang}
@@ -232,7 +222,7 @@ https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md
 9)\\
 https://www.raspberrypi.org/documentation/configuration/raspi-config.md [Zugang am 15.1.2017, um 10:14 Uhr; Alex Bradbury; Raspberry Pi Konfigurationseinstellungen]\\
 10)\\
-https://github.com/RubenHaag/Jufo\_Spokescreen [Zugang am 15.1.2017, um 11:59 Uhr; Ruben Haag; Projektordner]\\
+https://github.com/RubenHaag/Jufo\_Bikelight [Zugang am 15.1.2017, um 11:59 Uhr; Ruben Haag; Projektordner]\\
 11)\\
 http://fritzing.org/download/ [Zugang am 18.01.2017, um 13:02 Uhr; Friends-of-Fritzing e.V.; Fritzing]\\
 12)\\
@@ -255,10 +245,17 @@ https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf[Zugang am 20.2., um 8:00 Uh
 
 \subsection{Danksagungen}
 Wir vom Projekt \glqq Speichendisplay\grqq\ bedanken uns sehr bei der Fahrradwerkstatt der Holzkirche Lichterfelde für die Spende einer Fahrradgabel, ohne die unser Projekt nicht möglich gewesen wäre. Ebenfalls bedanken wir uns bei unserem Betreuer René Gorriz vom Paulsen-Gymnasium, der uns bei unserem Projekt tatkräftig unterstützt.
-\newpage
 \subsection{Kostenkalkulation und Materialliste}
-\begin{figure}[h]
+\begin{table}[H]
+	\caption{Materialübersicht}
 	\centering
-	\includegraphics[width=4cm]{tab.png}
-\end{figure}
+		\begin{tabular}{|c|c|}
+			\hline
+			 Material & Kosten\\  
+			\hline
+			
+			\hline
+		\end{tabular}
+	\label{Material}
+\end{table}
 \end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.2.16)  22 FEB 2017 00:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.2.16)  22 FEB 2017 14:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -849,6 +849,18 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 )
+(/usr/local/texlive/2016/texmf-dist/tex/latex/lipsum/lipsum.sty
+Package: lipsum 2014/07/27 v1.3 150 paragraphs of Lorem Ipsum dummy text
+\c@lips@count=\count104
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count105
+\float@exts=\toks23
+\float@box=\box29
+\@float@everytoks=\toks24
+\@floatcapt=\box30
+)
 (/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
 
@@ -866,6 +878,35 @@ Package graphics Info: Driver file: pdftex.def on input line 96.
 \Gin@req@height=\dimen121
 \Gin@req@width=\dimen122
 )
+(/usr/local/texlive/2016/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
+\LTleft=\skip46
+\LTright=\skip47
+\LTpre=\skip48
+\LTpost=\skip49
+\LTchunksize=\count106
+\LTcapwidth=\dimen123
+\LT@head=\box31
+\LT@firsthead=\box32
+\LT@foot=\box33
+\LT@lastfoot=\box34
+\LT@cols=\count107
+\LT@rows=\count108
+\c@LT@tables=\count109
+\c@LT@chunks=\count110
+\LT@p@ftn=\toks25
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+\fancy@headwidth=\skip50
+\f@ncyO@elh=\skip51
+\f@ncyO@erh=\skip52
+\f@ncyO@olh=\skip53
+\f@ncyO@orh=\skip54
+\f@ncyO@elf=\skip55
+\f@ncyO@erf=\skip56
+\f@ncyO@olf=\skip57
+\f@ncyO@orf=\skip58
+)
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
 
@@ -875,49 +916,52 @@ LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
 ))
 (/usr/local/texlive/2016/texmf-dist/tex/latex/subfigure/subfigure.sty
 Package: subfigure 2002/03/15 v2.1.5 subfigure package
-\subfigtopskip=\skip46
-\subfigcapskip=\skip47
-\subfigcaptopadj=\dimen123
-\subfigbottomskip=\skip48
-\subfigcapmargin=\dimen124
-\subfiglabelskip=\skip49
-\c@subfigure=\count104
-\c@lofdepth=\count105
-\c@subtable=\count106
-\c@lotdepth=\count107
+\subfigtopskip=\skip59
+\subfigcapskip=\skip60
+\subfigcaptopadj=\dimen124
+\subfigbottomskip=\skip61
+\subfigcapmargin=\dimen125
+\subfiglabelskip=\skip62
+\c@subfigure=\count111
+\c@lofdepth=\count112
+\c@subtable=\count113
+\c@lotdepth=\count114
 
 ****************************************
 * Local config file subfigure.cfg used *
 ****************************************
 (/usr/local/texlive/2016/texmf-dist/tex/latex/subfigure/subfigure.cfg)
-\subfig@top=\skip50
-\subfig@bottom=\skip51
+\subfig@top=\skip63
+\subfig@bottom=\skip64
 )
 (/usr/local/texlive/2016/texmf-dist/tex/latex/fragments/subscript.sty
 LaTeX Info: Redefining \textsubscript on input line 15.
 )
-(./Arbeit.aux)
+(./Arbeit.aux
+
+LaTeX Warning: Label `Schaltplan' multiply defined.
+
+)
 \openout1 = `Arbeit.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for LGR/cmr/m/n on input line 16.
-LaTeX Font Info:    Try loading font information for LGR+cmr on input line 16.
-
-(/usr/local/texlive/2016/texmf-dist/tex/latex/cbfonts-fd/lgrcmr.fd
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for LGR/cmr/m/n on input line 21.
+LaTeX Font Info:    Try loading font information for LGR+cmr on input line 21.
+ (/usr/local/texlive/2016/texmf-dist/tex/latex/cbfonts-fd/lgrcmr.fd
 File: lgrcmr.fd 2016/03/04 v1.1 Greek European Computer Regular
 )
-LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    ... okay on input line 21.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -955,17 +999,17 @@ LaTeX Font Info:    ... okay on input line 16.
 
 (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count108
-\scratchdimen=\dimen125
-\scratchbox=\box29
-\nofMPsegments=\count109
-\nofMParguments=\count110
-\everyMPshowfont=\toks23
-\MPscratchCnt=\count111
-\MPscratchDim=\dimen126
-\MPnumerator=\count112
-\makeMPintoPDFobject=\count113
-\everyMPtoPDFconversion=\toks24
+\scratchcounter=\count115
+\scratchdimen=\dimen126
+\scratchbox=\box35
+\nofMPsegments=\count116
+\nofMParguments=\count117
+\everyMPshowfont=\toks26
+\MPscratchCnt=\count118
+\MPscratchDim=\dimen127
+\MPnumerator=\count119
+\makeMPintoPDFobject=\count120
+\everyMPtoPDFconversion=\toks27
 ) (/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2016/05/10 v0.21 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -1013,7 +1057,7 @@ e
 <Smily3.png, id=1, 270.51062pt x 270.51062pt>
 File: Smily3.png Graphic file (type png)
  <use Smily3.png>
-Package pdftex.def Info: Smily3.png used on input line 20.
+Package pdftex.def Info: Smily3.png used on input line 25.
 (pdftex.def)             Requested size: 455.24408pt x 455.25961pt.
  [1
 
@@ -1026,20 +1070,20 @@ Package pdftex.def Info: Smily3.png used on input line 20.
  [2] [3] <dia1.png, id=26, 489.83pt x 471.7625pt>
 File: dia1.png Graphic file (type png)
  <use dia1.png>
-Package pdftex.def Info: dia1.png used on input line 68.
+Package pdftex.def Info: dia1.png used on input line 74.
 (pdftex.def)             Requested size: 142.26378pt x 137.01637pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 68--68
+Underfull \hbox (badness 10000) in paragraph at lines 74--74
 []\T1/cmr/m/n/9 (a) Kreis-be-we-gung mit Mit-tel-
  []
 
 <dia2.png, id=28, 395.97937pt x 404.00937pt>
 File: dia2.png Graphic file (type png)
  <use dia2.png>
-Package pdftex.def Info: dia2.png used on input line 70.
+Package pdftex.def Info: dia2.png used on input line 76.
 (pdftex.def)             Requested size: 142.26378pt x 145.14735pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 70--70
+Underfull \hbox (badness 10000) in paragraph at lines 76--76
 []\T1/cmr/m/n/9 (b) Kreis-be-we-gung mit Mit-tel-
  []
 
@@ -1049,216 +1093,193 @@ File: AufbauDer24BitAnsteuerungDesStreifens.png Graphic file (type png)
 
 <use AufbauDer24BitAnsteuerungDesStreifens.png>
 Package pdftex.def Info: AufbauDer24BitAnsteuerungDesStreifens.png used on inpu
-t line 85.
+t line 92.
 (pdftex.def)             Requested size: 455.24408pt x 23.58118pt.
 
 <Schaltplan_des_LED-Streifens.png, id=37, 292.09125pt x 448.67625pt>
 File: Schaltplan_des_LED-Streifens.png Graphic file (type png)
 
 <use Schaltplan_des_LED-Streifens.png>
-Package pdftex.def Info: Schaltplan_des_LED-Streifens.png used on input line 91
+Package pdftex.def Info: Schaltplan_des_LED-Streifens.png used on input line 99
 .
 (pdftex.def)             Requested size: 113.81102pt x 174.82556pt.
  <P1.png, id=38, 803.0pt x 401.5pt>
 File: P1.png Graphic file (type png)
 
 <use P1.png>
-Package pdftex.def Info: P1.png used on input line 103.
+Package pdftex.def Info: P1.png used on input line 110.
 (pdftex.def)             Requested size: 455.24408pt x 227.62596pt.
- <P2.png, id=39, 803.0pt x 85.31876pt>
+ [5 <./AufbauDer24BitAnsteuerungDesStreifens.png> <./Schaltplan_des_LED-Streife
+ns.png>] <P2.png, id=44, 803.0pt x 85.31876pt>
 File: P2.png Graphic file (type png)
  <use P2.png>
-Package pdftex.def Info: P2.png used on input line 111.
+Package pdftex.def Info: P2.png used on input line 119.
 (pdftex.def)             Requested size: 455.24408pt x 48.3705pt.
 
-<P3.png, id=40, 1606.0pt x 927.465pt>
-File: P3.png Graphic file (type png)
- <use P3.png>
-Package pdftex.def Info: P3.png used on input line 120.
-(pdftex.def)             Requested size: 455.24408pt x 262.90092pt.
+[6 <./P1.png>] <P4.png, id=48, 802.49812pt x 174.15062pt>
+File: P4.png Graphic file (type png)
+ <use P4.png>
+Package pdftex.def Info: P4.png used on input line 132.
+(pdftex.def)             Requested size: 455.24408pt x 98.79387pt.
 
-<Startanzeige.png, id=41, 637.38126pt x 360.34625pt>
-File: Startanzeige.png Graphic file (type png)
- <use Startanzeige.png>
-Package pdftex.def Info: Startanzeige.png used on input line 125.
-(pdftex.def)             Requested size: 199.16928pt x 112.59692pt.
+<P5.png, id=49, 1606.0pt x 1013.7875pt>
+File: P5.png Graphic file (type png)
+ <use P5.png>
+Package pdftex.def Info: P5.png used on input line 141.
+(pdftex.def)             Requested size: 455.24408pt x 287.37006pt.
+ [7 <./P2.png> <./P4.png>]
+<P6.png, id=55, 803.50188pt x 684.05562pt>
+File: P6.png Graphic file (type png)
+ <use P6.png>
+Package pdftex.def Info: P6.png used on input line 148.
+(pdftex.def)             Requested size: 455.24408pt x 387.57768pt.
+ [8 <./P5.png>]
+<P7.png, id=59, 804.00375pt x 43.66313pt>
+File: P7.png Graphic file (type png)
+ <use P7.png>
+Package pdftex.def Info: P7.png used on input line 155.
+(pdftex.def)             Requested size: 455.24408pt x 24.72299pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 96--128
+<u.png, id=60, 285.065pt x 236.885pt>
+File: u.png Graphic file (type png)
+ <use u.png>
+Package pdftex.def Info: u.png used on input line 165.
+(pdftex.def)             Requested size: 284.52756pt x 236.43982pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 160--168
 
  []
 
-[5 <./AufbauDer24BitAnsteuerungDesStreifens.png> <./Schaltplan_des_LED-Streifen
-s.png>] [6 <./P1.png>]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[7 <./P2.png> <./P3.png>] <P4.png, id=54, 802.49812pt x 174.15062pt>
-File: P4.png Graphic file (type png)
-
-<use P4.png>
-Package pdftex.def Info: P4.png used on input line 139.
-(pdftex.def)             Requested size: 455.24408pt x 98.79387pt.
- <P5.png, id=55, 1606.0pt x 1013.7875pt>
-File: P5.png Graphic file (type png)
- <use P5.png>
-Package pdftex.def Info: P5.png used on input line 148.
-(pdftex.def)             Requested size: 455.24408pt x 287.37006pt.
-
-<P6.png, id=56, 803.50188pt x 684.05562pt>
-File: P6.png Graphic file (type png)
- <use P6.png>
-Package pdftex.def Info: P6.png used on input line 155.
-(pdftex.def)             Requested size: 455.24408pt x 387.57768pt.
-
-<P7.png, id=57, 804.00375pt x 43.66313pt>
-File: P7.png Graphic file (type png)
- <use P7.png>
-Package pdftex.def Info: P7.png used on input line 162.
-(pdftex.def)             Requested size: 455.24408pt x 24.72299pt.
- [8 <./Startanzeige.png> <./P4.png>] [9 <./P5.png>]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<u.png, id=65, 285.065pt x 236.885pt>
-File: u.png Graphic file (type png)
- <use u.png>
-Package pdftex.def Info: u.png used on input line 172.
-(pdftex.def)             Requested size: 284.52756pt x 236.43982pt.
- [10 <./P6.png>] [11 <./P7.png> <./u.png>] <Rad.png, id=73, 741.77126pt x 384.9
-3813pt>
+[9 <./P6.png> <./P7.png>] [10 <./u.png>]
+<Rad.png, id=68, 741.77126pt x 384.93813pt>
 File: Rad.png Graphic file (type png)
  <use Rad.png>
-Package pdftex.def Info: Rad.png used on input line 184.
+Package pdftex.def Info: Rad.png used on input line 177.
 (pdftex.def)             Requested size: 270.30118pt x 140.26923pt.
- [12 <./Rad.png>] <Stopschild.png, id=77, 300.62312pt x 310.66063pt>
-File: Stopschild.png Graphic file (type png)
 
-<use Stopschild.png>
-Package pdftex.def Info: Stopschild.png used on input line 198.
+<Stopschild.png, id=69, 300.62312pt x 310.66063pt>
+File: Stopschild.png Graphic file (type png)
+ <use Stopschild.png>
+Package pdftex.def Info: Stopschild.png used on input line 187.
 (pdftex.def)             Requested size: 199.16928pt x 205.82353pt.
- <Smily0.png, id=78, 280.54813pt x 280.04625pt>
+
+[11 <./Rad.png>] <Smily0.png, id=73, 280.54813pt x 280.04625pt>
 File: Smily0.png Graphic file (type png)
 
 <use Smily0.png>
-Package pdftex.def Info: Smily0.png used on input line 205.
+Package pdftex.def Info: Smily0.png used on input line 194.
 (pdftex.def)             Requested size: 142.26378pt x 142.00551pt.
 File: Smily3.png Graphic file (type png)
  <use Smily3.png>
-Package pdftex.def Info: Smily3.png used on input line 206.
+Package pdftex.def Info: Smily3.png used on input line 195.
 (pdftex.def)             Requested size: 142.26378pt x 142.26785pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[13 <./Stopschild.png>]
-Overfull \hbox (4.43771pt too wide) in paragraph at lines 216--255
+ [12 <./Stopschild.png> <./Smily0.png>]
+Overfull \hbox (4.43771pt too wide) in paragraph at lines 206--245
 \T1/cmr/m/n/10.95 http://www.pd-f.de/wp-content/uploads/kalins-pdf/singles/them
 enblatt-die-fahrradwelt-in- zah-
  []
 
 
-Overfull \hbox (3.87256pt too wide) in paragraph at lines 216--255
+Overfull \hbox (3.87256pt too wide) in paragraph at lines 206--245
 \T1/cmr/m/n/10.95 http://www.monkeylectric.com/monkey_light_pro/ [Zu-gang am 10
 .01.2017, um 16:56 Uhr; Mon-
  []
 
 
-Overfull \hbox (6.75537pt too wide) in paragraph at lines 216--255
+Overfull \hbox (6.75537pt too wide) in paragraph at lines 206--245
 \T1/cmr/m/n/10.95 https://www.raspberrypi.org/downloads/raspbian/ [Zu-gang am 1
 5.1.2017 um 11:54 Uhr; Raspber-
  []
 
 
-Overfull \hbox (4.48314pt too wide) in paragraph at lines 216--255
+Overfull \hbox (4.48314pt too wide) in paragraph at lines 206--245
 \T1/cmr/m/n/10.95 https://i1.wp.com/www.novaspirit.com/wp-content/uploads/2016/
 10/wireing.jpg?ssl=1 [Zu-gang
  []
 
 
-Overfull \hbox (0.32002pt too wide) in paragraph at lines 216--255
+Overfull \hbox (0.32002pt too wide) in paragraph at lines 206--245
 \T1/cmr/m/n/10.95 https://www.raspberrypi.org/documentation/configuration/wirel
 ess/wireless-cli.md [Zu-gang am
  []
 
 
-Overfull \hbox (11.63094pt too wide) in paragraph at lines 216--255
+Overfull \hbox (11.63094pt too wide) in paragraph at lines 206--245
 \T1/cmr/m/n/10.95 https://www.raspberrypi.org/documentation/configuration/raspi
 -config.md [Zu-gang am 15.1.2017,
  []
 
 
-Overfull \hbox (3.17165pt too wide) in paragraph at lines 216--255
+Overfull \hbox (3.17165pt too wide) in paragraph at lines 206--245
 \T1/cmr/m/n/10.95 -629536.html? gclid=CPfQ7JrP29ECFcG7GwodF3UFtQ&insert_kz=VQ&h
 k=SEM&WT.srch= 
  []
 
 
-Overfull \hbox (16.70816pt too wide) in paragraph at lines 216--255
+Overfull \hbox (16.70816pt too wide) in paragraph at lines 206--245
 \T1/cmr/m/n/10.95 1&WT.mc_id=g oo-gle_pla&s_kwcid=AL!222!3!173789970902!!!g!!&e
 f_id=WBpFUQAABUMWE 
  []
 
 
-Overfull \hbox (17.79248pt too wide) in paragraph at lines 216--255
+Overfull \hbox (17.79248pt too wide) in paragraph at lines 206--245
 \T1/cmr/m/n/10.95 google_&wt_cc2=913-0001_Hardware_257367&gclid=CMeX0KL759ECFYG
 w7Qod 2q8CRQ [Zu-
  []
 
 
-Overfull \hbox (5.02965pt too wide) in paragraph at lines 216--255
+Overfull \hbox (5.02965pt too wide) in paragraph at lines 206--245
 \T1/cmr/m/n/10.95 Waterproof-H3/111860633668? _trk-sid=p2141725.c100338.m3726&_
 trkparms=aid%3D222007% 
  []
 
 
-Overfull \hbox (10.5522pt too wide) in paragraph at lines 216--255
+Overfull \hbox (10.5522pt too wide) in paragraph at lines 206--245
 \T1/cmr/m/n/10.95 8990b9f5cc22f9914% 26pid%3D100338%26rk%3D1%26rkt%3D21%26sd%3D
 301963844528 [Zu-gang
  []
 
 
-Overfull \hbox (11.63696pt too wide) in paragraph at lines 216--255
+Overfull \hbox (11.63696pt too wide) in paragraph at lines 206--245
 \T1/cmr/m/n/10.95 1EC6Y/ref=sr_1_1?s=ce- de&ie=UTF8&qid=1483383358&sr=1-1&keywo
 rds=akkupack [Zu-gang
  []
 
-[14 <./Smily0.png>] [15] [16] <tab.png, id=92, 158.5925pt x 198.24063pt>
-File: tab.png Graphic file (type png)
+[13] [14] (./Arbeit.aux)
 
-<use tab.png>
-Package pdftex.def Info: tab.png used on input line 262.
-(pdftex.def)             Requested size: 113.81102pt x 142.2673pt.
- [17 <./tab.png>] (./Arbeit.aux) ) 
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 5516 strings out of 493014
- 73669 string characters out of 6133351
- 153566 words of memory out of 5000000
- 8933 multiletter control sequences out of 15000+600000
+ 5978 strings out of 493014
+ 79059 string characters out of 6133351
+ 254662 words of memory out of 5000000
+ 9382 multiletter control sequences out of 15000+600000
  17464 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,12n,35p,2480b,282s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2016/texmf-dist/fonts/enc
-/dvips/cm-super/cm-super-t1.enc}</usr/local/texlive/2016/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmsy8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/euro
-sym/feymr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/cbfonts/
-grmn1095.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sf
-bx1095.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx
-1200.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx14
-40.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm0800
-.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm0900.p
-fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb
-></usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb><
-/usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb>
-Output written on Arbeit.pdf (17 pages, 6660343 bytes).
+ 38i,12n,43p,2480b,276s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
+/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
+usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></us
+r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
+local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/loc
+al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/loca
+l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/
+texlive/2016/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb></usr/local/texl
+ive/2016/texmf-dist/fonts/type1/public/cbfonts/grmn1095.pfb></usr/local/texlive
+/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2
+016/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/201
+6/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2016/
+texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2016/te
+xmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/local/texlive/2016/texm
+f-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2016/texmf-
+dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2016/texmf-di
+st/fonts/type1/public/cm-super/sfrm1728.pfb>
+Output written on Arbeit.pdf (14 pages, 5708611 bytes).
 PDF statistics:
- 151 PDF objects out of 1000 (max. 8388607)
- 92 compressed objects within 1 object stream
+ 139 PDF objects out of 1000 (max. 8388607)
+ 86 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 91 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 76 words of extra memory for PDF output out of 10000 (max. 10000000)
 
