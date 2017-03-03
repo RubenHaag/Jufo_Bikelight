@@ -7,9 +7,7 @@ from neopixel import Adafruit_NeoPixel, Color
 import RPi.GPIO as gp
 
 
-path = "/home/pi/Jufo_Bikelight/Release/Bilder/Herz.png"
-im = open(path)
-pix = im.load()
+path = "/home/pi/Jufo_Bikelight/Release/Bilder/Herz"
 
 breite, höhe = im.size	#die Breite und die höhe des Bildes wird ausgelesen
 breite = breite /2 	#damit der Koordinatenmittelpunkt in die mitte des Bildes Kommt
@@ -67,6 +65,16 @@ def startPrint():
 	line(50)
 	print("xx km/h")
 
+def bildNeuLaden():
+	global pix
+	# Ein Bild kann nun als png oder als jpg gegeben sein
+	try:
+		im = open(path + "png")
+	except:
+		im = open(path + "jpeg")
+	else:
+		im = open(path + "jpg")
+	pix = im.load()
 
 def bildAuslesen(winkel, rad):
 
@@ -98,7 +106,6 @@ def streifenBedienen(t, w):
 	M = int(n/2)
 
 	for i in range(u):
-<<<<<<< Updated upstream
 		u-=1		#u wird heruntergezählt, da dieser Teil des Led Streifens gespiegelt ist
 		streifen.setPixelColor(i, bildAuslesen(alpha, radien[u])) # alpha + pi, da dieser LED-Streifen gespiegelt ist
 		streifen.setPixelColor(i + M, bildAuslesen(gamma, radien[u]))
