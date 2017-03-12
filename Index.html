@@ -1,0 +1,40 @@
+<html>
+<head>
+<meta charset="UTF-8" />
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+
+<php
+if (isset($_POST['Synchronisieren']))
+{
+exec("sudo apt-get update")
+}
+
+if (isset($_POST['Hochladen']))
+{
+exec("wget -r -A jpg, png http:")
+}
+
+if (isset($_POST['Starten']))
+{
+exec("sudo python3 /home/pi/Jufo_Bikelight/Release/main.py");
+}
+
+if (isset($_POST['Aus']))
+{
+exec("sudo python3 /home/pi/main2.py");
+}
+>
+
+<form method="post">
+<button class="btn" name="Synkronisieren">Synkronisieren</button><br><br>
+<label>Wählen Sie ein Bild (.png, .jpeg, usw.) aus:<br><br>
+<input name="datei" type="file" accept="image/*"> 
+</label>
+<button class="btn" name="Hochladen">Hochladen</button><br><br>
+<button class="btn" name="Starten">Starten</button>&nbsp;
+<button class="btn" name="Aus">Aus</button><br><br>
+</form> 
+
+</html>

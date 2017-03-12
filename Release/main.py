@@ -9,7 +9,7 @@ from os.path import isfile
 import RPi.GPIO as gp
 
 
-path = "/home/pi/Bilder/Beispiel.png"
+path = "/home/pi/Bilder/Bild.png"
 im = open(path)
 pix = im.load()
 breite = 0
