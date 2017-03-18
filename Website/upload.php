@@ -57,5 +57,6 @@ function resizeImage($file, $w, $h, $extension, $new_path){
 
 resizeImage($temp_path, 90, 90, $extension, $new_path);
 echo 'Bild erfolgreich hochgeladen: </a href="'.$new_path.'">'.$new_path.'</a>';
+echo '<img src="/home/pi/Bilder/Bild.png">'
 #exec('rm /home/pi/Bilder/Temp.*');
 ?>
